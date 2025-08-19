@@ -71,6 +71,8 @@ const AnimatedCard = ({ children, delay = 0 }) => {
 const ExperiencePage = () => {
   return (
     <main className="relative z-10 container mx-auto px-6 py-24 sm:py-32">
+      {/* Subtle page-level aurora/gradient to ensure vibrancy on this tab */}
+      <div className="absolute inset-0 -z-10 aurora opacity-28 pointer-events-none" />
       {/* --- Page Header --- */}
       <AnimatedCard>
         <div className="text-center mb-20">
@@ -91,7 +93,7 @@ const ExperiencePage = () => {
           <AnimatedCard key={index} delay={index * 200}>
             <div className="mb-12 pl-12 relative">
               <div className="absolute -left-5 top-1">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center ring-8 ring-slate-900">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center ring-8">
                   <Briefcase size={20} className="text-white"/>
                 </div>
               </div>

@@ -137,7 +137,7 @@ const HomePage = () => {
         }
       `}} />
 
-      <main className="relative z-10 overflow-hidden">
+  <main className="relative z-20 overflow-hidden">
         {/* Multi-layered Background */}
         <div className="fixed inset-0 z-[-10]">
           {/* Base gradient matching the image */}
@@ -227,7 +227,7 @@ const HomePage = () => {
 
         {/* --- Featured Projects Section --- */}
         <section className="py-24 sm:py-32 px-6 relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/50 to-purple-900/30 backdrop-blur-sm"></div>
+            {/* Removed dark gradient overlay to show global background */}
           <div className="max-w-7xl mx-auto relative z-10">
               <AnimatedSection>
                   <div className="text-center mb-16">
@@ -262,7 +262,7 @@ const HomePage = () => {
 
         {/* --- Final Call to Action --- */}
         <section className="py-24 sm:py-32 px-6 text-center relative">
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent"></div>
+            {/* Removed dark gradient overlay to show global background */}
           <AnimatedSection>
               <div className="relative z-10 p-12 glass-morphism rounded-3xl max-w-4xl mx-auto">
                   <Sparkles className="mx-auto h-12 w-12 text-yellow-400 animate-pulse mb-6"/>

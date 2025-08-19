@@ -43,7 +43,9 @@ const AnimatedCard = ({ children, delay = 0 }) => {
 
 const ContactPage = () => {
   return (
-    <main className="relative z-10 container mx-auto px-6 py-24 sm:py-32 overflow-hidden">
+        <main className="relative z-10 container mx-auto px-6 py-24 sm:py-32 overflow-hidden">
+            {/* Subtle page-level aurora/gradient to ensure vibrancy on this tab */}
+            <div className="absolute inset-0 -z-10 aurora opacity-30 pointer-events-none" />
       {/* --- Page Header --- */}
       <AnimatedCard>
         <div className="text-center mb-20">
@@ -62,8 +64,8 @@ const ContactPage = () => {
       <div className="max-w-6xl mx-auto grid md:grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Email Card */}
         <AnimatedCard delay={2}>
-            <a href="mailto:krishnatmsv@gmail.com" className="group relative block h-full p-8 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden transition-all duration-300 hover:border-purple-400 hover:-translate-y-2">
-                <div className="absolute top-0 right-0 -mt-16 -mr-16 w-48 h-48 bg-purple-500/20 rounded-full blur-2xl group-hover:w-64 group-hover:h-64 transition-all duration-500"></div>
+            <a href="mailto:krishnatmsv@gmail.com" className="group relative block h-full p-8 rounded-3xl border border-white/10 overflow-hidden transition-all duration-300 hover:border-purple-400 hover:-translate-y-2">
+                {/* Removed local gradient overlay to show global background */}
                 <div className="relative">
                     <div className="p-4 inline-flex bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl mb-6">
                         <Mail size={28} className="text-white"/>

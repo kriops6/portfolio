@@ -88,7 +88,9 @@ const AnimatedCard = ({ children, delay = 0 }) => {
 
 const SkillsPage = () => {
     return (
-        <main className="relative z-10 container mx-auto px-6 py-24 sm:py-32">
+                <main className="relative z-10 container mx-auto px-6 py-24 sm:py-32">
+                    {/* Subtle page-level aurora/gradient to ensure vibrancy on this tab */}
+                    <div className="absolute inset-0 -z-10 aurora opacity-28 pointer-events-none" />
             {/* --- Page Header --- */}
             <AnimatedCard>
                 <div className="text-center mb-20">
@@ -109,7 +111,7 @@ const SkillsPage = () => {
                     <div className="text-center mb-12">
                         <h2 className="text-4xl font-bold text-white">Core Competencies</h2>
                     </div>
-                    <div className="w-full h-96 md:h-[500px] bg-white/5 p-4 rounded-3xl border border-white/10 backdrop-blur-xl">
+                    <div className="w-full h-96 md:h-[500px] p-4 rounded-3xl border border-white/10">
                         <ResponsiveContainer width="100%" height="100%">
                             <RadarChart cx="50%" cy="50%" outerRadius="80%" data={skillsData.radar}>
                                 <defs>
