@@ -13,6 +13,8 @@ import { motion } from 'framer-motion';
 const Header = () => {
   // The usePathname hook has been removed to fix build errors.
   // As a result, the active link highlighting is disabled.
+  // Use Next.js Link for internal navigation
+  import Link from 'next/link';
 
   const navLinks = [
     { name: 'Home', href: '/' },
@@ -27,7 +29,7 @@ const Header = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-black/40 border-b border-white/20 shadow-2xl backdrop-blur-xl">
       <div className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          <a href="/" className="flex items-center space-x-3">
+          <Link href="/" className="flex items-center space-x-3">
             <div className="relative">
               <div className="w-12 h-12 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
                 <Code size={24} className="text-white" />
@@ -38,7 +40,7 @@ const Header = () => {
                 Krishna Thirumalai
               </div>
             </div>
-          </a>
+          </Link>
           
           <div className="hidden md:flex items-center space-x-1 bg-black/20 rounded-full p-1">
             {navLinks.map((link) => (

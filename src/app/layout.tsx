@@ -126,12 +126,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Krishna Thirumalai | Software Engineer</title>
-        <meta name="description" content="Personal portfolio of Krishna Thirumalai, a software engineering student specializing in full-stack development, robotics, and innovative technologies." />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
+  <title>Krishna Thirumalai | Software Engineer</title>
+  <meta name="description" content="Personal portfolio of Krishna Thirumalai, a software engineering student specializing in full-stack development, robotics, and innovative technologies." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
       </head>
       <body className="bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 text-white min-h-screen">
         <Header />

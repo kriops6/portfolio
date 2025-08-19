@@ -268,7 +268,7 @@ const HomePage = () => {
                   <Sparkles className="mx-auto h-12 w-12 text-yellow-400 animate-pulse mb-6"/>
                   <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Have an Idea?</h2>
                   <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
-                      I'm always ready for the next challenge. If you're looking for a passionate engineer to help bring your vision to life, let's talk.
+                      I&apos;m always ready for the next challenge. If you&apos;re looking for a passionate engineer to help bring your vision to life, let&apos;s talk.
                   </p>
                   <a href="/contact" className="group relative inline-flex items-center justify-center px-10 py-5 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-2xl font-bold text-lg overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-pink-500/30">
                       <span className="relative z-10">Let's Build Together</span>

@@ -19,7 +19,7 @@ const aboutData = {
       date: '2017 – 2024',
       title: 'Student Council Assistant',
       subtitle: 'Al Khor International School (AKIS), Qatar',
-      description: 'Spearheaded the planning and execution of over 20 school events annually, including Olympiads and cultural programs, reaching more than 1,000 students.'
+    description: 'Spearheaded the planning and execution of over 20 school events annually, including Olympiads and cultural programs, reaching more than 1,000 students.'
     },
     {
       type: 'education',
@@ -27,7 +27,7 @@ const aboutData = {
       date: 'Graduated 2024',
       title: 'High School Diploma',
       subtitle: 'Al Khor International School (AKIS), Qatar',
-      description: 'Completed a comprehensive high school education, laying the groundwork for a future in engineering and technology.'
+    description: 'Completed a comprehensive high school education, laying the groundwork for a future in engineering and technology.'
     },
     {
       type: 'education',
@@ -35,7 +35,7 @@ const aboutData = {
       date: '2023 – 2024',
       title: 'Diploma in Engineering',
       subtitle: 'Specialized Technical Institute',
-      description: 'Completed an intensive diploma focusing on foundational engineering principles, applied mathematics, and hands-on workshop practices, providing a strong practical basis for advanced university studies.'
+    description: 'Completed an intensive diploma focusing on foundational engineering principles, applied mathematics, and hands-on workshop practices, providing a strong practical basis for advanced university studies.'
     },
     {
       type: 'work',
@@ -43,7 +43,7 @@ const aboutData = {
       date: '2024 – Present',
       title: 'Student Ambassador & International Student Representative',
       subtitle: 'Queen’s University Belfast',
-      description: 'Advocated for the international student community, supported 15+ major university events, and mentored hundreds of new international students, easing their academic and cultural transition.'
+    description: 'Advocated for the international student community, supported 15+ major university events, and mentored hundreds of new international students, easing their academic and cultural transition.'
     },
     {
       type: 'education',
@@ -51,7 +51,7 @@ const aboutData = {
       date: '2024 – Present',
       title: 'BEng (Hons) Software Engineering',
       subtitle: 'Queen’s University Belfast, UK',
-      description: 'Pursuing a rigorous curriculum at a prestigious Russell Group university, focusing on advanced software development principles and practices.'
+    description: 'Pursuing a rigorous curriculum at a prestigious Russell Group university, focusing on advanced software development principles and practices.'
     },
   ],
   achievements: [
