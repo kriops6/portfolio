@@ -91,6 +91,13 @@ const TypeAnimation = () => {
 // --- Data for Featured Projects ---
 const featuredProjects = [
   {
+    title: "Spin State (Project Pulsor)",
+    category: "Full-Stack",
+    description: "Designed and deployed a comprehensive full-stack platform enabling seamless collaboration among scientists and engineers.",
+    tech: ["React.js", "Node.js", "Docker", "MongoDB"],
+    link: "/projects"
+  },
+  {
     title: "ORION-R: Autonomous Drone Swarm",
     category: "AI/ML & Robotics",
     description: "Leading development of synchronized autonomous drones using computer vision and swarm intelligence for search & rescue operations.",
