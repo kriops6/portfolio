@@ -91,17 +91,24 @@ const TypeAnimation = () => {
 // --- Data for Featured Projects ---
 const featuredProjects = [
   {
-    title: "Spin State (Project Pulsor)",
-    category: "Full-Stack",
-    description: "Designed and deployed a full-stack platform from scratch to enable seamless collaboration among scientists and engineers.",
-    tech: ["React.js", "Node.js", "Docker", "MongoDB"],
+    title: "ORION-R: Autonomous Drone Swarm",
+    category: "AI/ML & Robotics",
+    description: "Leading development of synchronized autonomous drones using computer vision and swarm intelligence for search & rescue operations.",
+    tech: ["Computer Vision", "Swarm AI", "ROS", "Python"],
     link: "/projects"
   },
   {
-    title: "Automated Harbor Prototype",
-    category: "Robotics",
-    description: "Engineered a functional, scaled-down model of an automated harbor, integrating robotics and mechatronics to earn 4th place in a national competition.",
-    tech: ["Robotics", "Mechatronics", "System Integration"],
+    title: "Project Umbra: Haptic Headband",
+    category: "Hardware & AI",
+    description: "Designed a smart haptic feedback headband for visually impaired navigation using depth sensors and spatial audio.",
+    tech: ["Arduino", "Depth Sensing", "Haptics", "Spatial Audio"],
+    link: "/projects"
+  },
+  {
+    title: "IronEye: AI Manufacturing Inspector",
+    category: "AI/ML",
+    description: "Built an AI-powered visual inspection system detecting manufacturing defects with 95% accuracy using deep learning.",
+    tech: ["TensorFlow", "Computer Vision", "Deep Learning", "Python"],
     link: "/projects"
   },
 ];
