@@ -27,7 +27,7 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
         initial="hidden"
         animate="enter"
         exit="exit"
-        transition={{ type: 'linear', duration: 0.3 }}
+        transition={{ type: 'tween', duration: 0.3, ease: 'linear' }}
       >
         {children}
       </motion.div>
