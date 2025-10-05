@@ -404,27 +404,17 @@ export default function ArsenalPage() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="glass-panel p-8 rounded-2xl border border-white/10 text-center"
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-400">
-                2+
-              </div>
+              <div className="text-3xl font-bold text-blue-400">0</div>
               <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Years Experience</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">
-                25+
-              </div>
-              <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Technologies</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-purple-400">
-                20+
-              </div>
+              <div className="text-3xl font-bold text-purple-400">5</div>
               <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Projects</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-400">8</div>
+              <div className="text-3xl font-bold text-yellow-400">âˆž</div>
               <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Learning Mode</div>
             </div>
           </div>
@@ -461,10 +451,10 @@ export default function ArsenalPage() {
             <div className="text-4xl mb-4">??</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Leadership & Diplomacy</h3>
             <ul className={`space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              <li>• Student Ambassador representing Queen's University Belfast</li>
-              <li>• International Student Representative serving diverse communities</li>
-              <li>• Led 15+ member teams in high-pressure event coordination</li>
-              <li>• Skilled in conflict resolution and consensus building</li>
+              <li>ï¿½ Student Ambassador representing Queen's University Belfast</li>
+              <li>ï¿½ International Student Representative serving diverse communities</li>
+              <li>ï¿½ Led 15+ member teams in high-pressure event coordination</li>
+              <li>ï¿½ Skilled in conflict resolution and consensus building</li>
             </ul>
           </motion.div>
 
@@ -479,10 +469,10 @@ export default function ArsenalPage() {
             <div className="text-4xl mb-4">??</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Communication & Public Speaking</h3>
             <ul className={`space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              <li>• Delivered presentations at university open days and student events</li>
-              <li>• Experienced in facilitating cross-cultural dialogue</li>
-              <li>• Mentored hundreds of students through complex transitions</li>
-              <li>• Clear and effective communicator across diverse audiences</li>
+              <li>ï¿½ Delivered presentations at university open days and student events</li>
+              <li>ï¿½ Experienced in facilitating cross-cultural dialogue</li>
+              <li>ï¿½ Mentored hundreds of students through complex transitions</li>
+              <li>ï¿½ Clear and effective communicator across diverse audiences</li>
             </ul>
           </motion.div>
 
@@ -500,13 +490,13 @@ export default function ArsenalPage() {
               <div>
                 <p className="font-semibold mb-2">Languages:</p>
                 <ul className="space-y-1 ml-4">
-                  <li>• Tamil (Native)</li>
-                  <li>• English (IELTS 8.0)</li>
-                  <li>• Hindi (Fluent)</li>
-                  <li>• Japanese (Basic)</li>
+                  <li>ï¿½ Tamil (Native)</li>
+                  <li>ï¿½ English (IELTS 8.0)</li>
+                  <li>ï¿½ Hindi (Fluent)</li>
+                  <li>ï¿½ Japanese (Basic)</li>
                 </ul>
               </div>
-              <p>• International Student Representative serving diverse communities</p>
+              <p>ï¿½ International Student Representative serving diverse communities</p>
             </div>
           </motion.div>
 
@@ -521,10 +511,10 @@ export default function ArsenalPage() {
             <div className="text-4xl mb-4">??</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Teamwork & Collaboration</h3>
             <ul className={`space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              <li>• Collaborated with 15+ member councils to execute major events</li>
-              <li>• Coordinated logistics for 20+ annual school programs (1,000+ attendees)</li>
-              <li>• Built consensus across diverse stakeholder groups</li>
-              <li>• Fostered inclusive environments for international students</li>
+              <li>ï¿½ Collaborated with 15+ member councils to execute major events</li>
+              <li>ï¿½ Coordinated logistics for 20+ annual school programs (1,000+ attendees)</li>
+              <li>ï¿½ Built consensus across diverse stakeholder groups</li>
+              <li>ï¿½ Fostered inclusive environments for international students</li>
             </ul>
           </motion.div>
 
@@ -539,10 +529,10 @@ export default function ArsenalPage() {
             <div className="text-4xl mb-4">??</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Problem Solving & Critical Thinking</h3>
             <ul className={`space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              <li>• Developed innovative solutions for student integration challenges</li>
-              <li>• Managed event logistics with tight deadlines and constraints</li>
-              <li>• Adapted quickly to multicultural academic environments</li>
-              <li>• Applied systematic thinking from physics to solve complex problems</li>
+              <li>ï¿½ Developed innovative solutions for student integration challenges</li>
+              <li>ï¿½ Managed event logistics with tight deadlines and constraints</li>
+              <li>ï¿½ Adapted quickly to multicultural academic environments</li>
+              <li>ï¿½ Applied systematic thinking from physics to solve complex problems</li>
             </ul>
           </motion.div>
 
@@ -557,10 +547,10 @@ export default function ArsenalPage() {
             <div className="text-4xl mb-4">??</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Adaptability & Growth Mindset</h3>
             <ul className={`space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              <li>• Successfully transitioned across countries and educational systems</li>
-              <li>• Continuously learning new technologies and methodologies</li>
-              <li>• Studying physics from mechanics to quantum mechanics</li>
-              <li>• Embraced challenges as opportunities for growth</li>
+              <li>ï¿½ Successfully transitioned across countries and educational systems</li>
+              <li>ï¿½ Continuously learning new technologies and methodologies</li>
+              <li>ï¿½ Studying physics from mechanics to quantum mechanics</li>
+              <li>ï¿½ Embraced challenges as opportunities for growth</li>
             </ul>
           </motion.div>
         </div>
