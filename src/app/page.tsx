@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Sparkles, ArrowRight, Zap, ChevronDown, Brain } from 'lucide-react';
-import { useTheme } from '../components/ThemeProvider';
+import { useTheme } from '../components/SeasonalThemeProvider';
 import OptimizedBackground from '../components/OptimizedBackground';
 
 // Motion.dev spring config for smooth animations
@@ -32,7 +32,7 @@ const itemVariants = {
 
 // Custom typing animation component
 const TypeAnimation = () => {
-  const { isDarkMode } = useTheme();
+  const { themeConfig } = useTheme();
   const [currentText, setCurrentText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -69,9 +69,9 @@ const TypeAnimation = () => {
   }, [currentText, currentIndex, isDeleting, texts]);
   
   return (
-    <span className="inline-flex items-baseline text-white">
-      <span className="text-white">{currentText}</span>
-      <span className="inline-block w-0.5 h-[1em] bg-white ml-1 animate-pulse">&nbsp;</span>
+    <span className="inline-flex items-baseline" style={{ color: themeConfig.colors.primary }}>
+      <span>{currentText}</span>
+      <span className="inline-block w-0.5 h-[1em] ml-1 animate-pulse" style={{ backgroundColor: themeConfig.colors.primary }}>&nbsp;</span>
     </span>
   );
 };
@@ -109,7 +109,7 @@ const featuredProjects = [
 ];
 
 export default function HomePage() {
-  const { isDarkMode } = useTheme();
+  const { themeConfig } = useTheme();
   
   return (
     <div className="min-h-screen w-full relative">
@@ -126,9 +126,12 @@ export default function HomePage() {
             animate="visible"
           >
               <motion.div variants={itemVariants}>
-                  <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 leading-tight">
+                  <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 leading-tight" style={{ fontFamily: themeConfig.fonts.heading }}>
                     <motion.span 
-                      className="block bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+                      className="block bg-gradient-to-r bg-clip-text text-transparent"
+                      style={{
+                        backgroundImage: `linear-gradient(to right, ${themeConfig.colors.primary}, ${themeConfig.colors.secondary}, ${themeConfig.colors.accent})`
+                      }}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ type: "spring", ...springConfig, delay: 0.2 }}
@@ -136,7 +139,10 @@ export default function HomePage() {
                       KRISHNA
                     </motion.span>
                     <motion.span 
-                      className="block bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent"
+                      className="block bg-gradient-to-r bg-clip-text text-transparent"
+                      style={{
+                        backgroundImage: `linear-gradient(to right, ${themeConfig.colors.secondary}, ${themeConfig.colors.primary}, ${themeConfig.colors.accent})`
+                      }}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ type: "spring", ...springConfig, delay: 0.4 }}

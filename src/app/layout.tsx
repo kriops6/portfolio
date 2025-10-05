@@ -7,8 +7,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Code, Github, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ThemeProvider } from '../components/ThemeProvider';
-import { ThemeToggle } from '../components/ThemeToggle';
+import { SeasonalThemeProvider } from '../components/SeasonalThemeProvider';
+import { SeasonalThemeWheel } from '../components/SeasonalThemeWheel';
 import EasterEggs from '../components/EasterEggs';
 import KonamiCodeDetector from '../components/KonamiCodeDetector';
 import TypingTestGame from '../components/TypingTestGame';
@@ -104,7 +104,6 @@ const Header = () => {
           </div>
 
           <div className="flex items-center space-x-3">
-            <ThemeToggle />
             <a
               href="https://github.com/kriops6"
               target="_blank"
@@ -134,16 +133,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-gradient-to-br from-indigo-950 via-blue-900 to-violet-900 text-white">
-        <ThemeProvider>
+      <body className="min-h-screen">
+        <SeasonalThemeProvider>
           <Header />
           <PageTransitionWrapper>
             {children}
           </PageTransitionWrapper>
+          <SeasonalThemeWheel />
           <EasterEggs />
           <KonamiCodeDetector />
           <TypingTestGame />
-        </ThemeProvider>
+        </SeasonalThemeProvider>
       </body>
     </html>
   );

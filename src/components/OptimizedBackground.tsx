@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useTheme } from './ThemeProvider';
+import { useTheme } from './SeasonalThemeProvider';
 
 interface Particle {
   x: number;
@@ -23,7 +23,7 @@ export default function OptimizedBackground({
   connectionDistance = 120, 
   gradientColors = ['#047857', '#1e40af', '#7c3aed', '#be185d']
 }: OptimizedBackgroundProps) {
-  const { isDarkMode } = useTheme();
+  const { themeConfig } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameIdRef = useRef<number | undefined>(undefined);
   const particlesRef = useRef<Particle[]>([]);
@@ -86,18 +86,12 @@ export default function OptimizedBackground({
 
       timeRef.current += 0.005;
 
-      // Draw gradient background (theme-aware)
+      // Draw gradient background (seasonal theme-aware)
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      if (isDarkMode) {
-        gradient.addColorStop(0, '#1e1b4b'); // indigo-950
-        gradient.addColorStop(0.5, '#581c87'); // purple-900
-        gradient.addColorStop(1, '#1e3a8a'); // blue-900
-      } else {
-        gradient.addColorStop(0, '#dbeafe'); // blue-50
-        gradient.addColorStop(0.5, '#fae8ff'); // purple-50
-        gradient.addColorStop(1, '#fce7f3'); // pink-50
-      }
-      ctx.fillStyle = gradient;
+      const particleColors = themeConfig.particleColors;
+      
+      // Use theme's background color
+      ctx.fillStyle = themeConfig.colors.background;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Update and draw particles
@@ -117,10 +111,11 @@ export default function OptimizedBackground({
 
         const alpha = 0.6 + Math.sin(timeRef.current + i) * 0.3;
         
-        // Draw particle
+        // Draw particle with theme color
+        const colorIndex = i % particleColors.length;
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${particle.hue + timeRef.current * 20}, 80%, 70%, ${alpha})`;
+        ctx.fillStyle = `${particleColors[colorIndex]}${Math.floor(alpha * 255).toString(16).padStart(2, '0')}`;
         ctx.fill();
 
         // Optimized connection drawing - only check ahead
@@ -135,7 +130,8 @@ export default function OptimizedBackground({
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(other.x, other.y);
-            ctx.strokeStyle = `hsla(${particle.hue}, 70%, 65%, ${0.3 * (1 - dist / connectionDistance)})`;
+            const connectionAlpha = 0.3 * (1 - dist / connectionDistance);
+            ctx.strokeStyle = `${particleColors[0]}${Math.floor(connectionAlpha * 255).toString(16).padStart(2, '0')}`;
             ctx.lineWidth = 1.5;
             ctx.stroke();
           }
@@ -154,7 +150,7 @@ export default function OptimizedBackground({
         cancelAnimationFrame(animationFrameIdRef.current);
       }
     };
-  }, [particleCount, connectionDistance, gradientColors, isDarkMode]);
+  }, [particleCount, connectionDistance, gradientColors, themeConfig]);
 
   return (
     <canvas
