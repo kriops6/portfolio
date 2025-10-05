@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Briefcase, GraduationCap, Award, Sparkles, Brain, Target, Rocket, Users } from 'lucide-react';
@@ -7,7 +7,7 @@ import OptimizedBackground from '../../components/OptimizedBackground';
 
 // --- Data specific to the About page ---
 const aboutData = {
-  summary: "Highly motivated and results-driven Software Engineering student at Queen's University Belfast (a Russell Group university) with a robust foundation in full-stack development, robotics, and engineering. Proven ability to translate complex technical requirements into innovative, scalable solutions, as evidenced by the independent design, development, and deployment of 'Spin State (Project Pulsor)'â€”a comprehensive collaborative platform. Beyond software, I'm pursuing deep knowledge in physicsâ€”progressing from classical mechanics through quantum mechanics toward particle physicsâ€”bringing a unique analytical perspective to technical challenges. Demonstrated leadership, strategic problem-solving, and cross-cultural communication skills, cultivated through significant academic achievements, competitive successes, and impactful student representation roles. Eager to leverage cutting-edge technology and interdisciplinary knowledge to drive innovation and foster collaborative success in dynamic software development environments.",
+  summary: "Highly motivated and results-driven Software Engineering student at Queen's University Belfast (a Russell Group university) with a robust foundation in full-stack development, robotics, and engineering. Proven ability to translate complex technical requirements into innovative, scalable solutions, as evidenced by the independent design, development, and deployment of 'Spin State (Project Pulsor)'—a comprehensive collaborative platform. Beyond software, I'm pursuing deep knowledge in physics—progressing from classical mechanics through quantum mechanics toward particle physics—bringing a unique analytical perspective to technical challenges. Demonstrated leadership, strategic problem-solving, and cross-cultural communication skills, cultivated through significant academic achievements, competitive successes, and impactful student representation roles. Eager to leverage cutting-edge technology and interdisciplinary knowledge to drive innovation and foster collaborative success in dynamic software development environments.",
   timeline: [
     {
       type: 'education',
@@ -20,7 +20,7 @@ const aboutData = {
     {
       type: 'education',
       icon: GraduationCap,
-      date: '2023 â€“ 2024',
+      date: '2023 – 2024',
       title: 'Diploma in Engineering',
       subtitle: 'Specialized Technical Institute',
       description: 'Completed an intensive diploma focusing on foundational engineering principles, applied mathematics, and hands-on workshop practices, providing a strong practical basis for advanced university studies.'
@@ -28,7 +28,7 @@ const aboutData = {
     {
       type: 'work',
       icon: Briefcase,
-      date: '2024 â€“ Present',
+      date: '2024 – Present',
       title: 'Student Ambassador & International Student Representative',
       subtitle: "Queen's University Belfast",
       description: 'Advocated for the international student community, supported 15+ major university events, and mentored hundreds of new international students, easing their academic and cultural transition.'
@@ -36,7 +36,7 @@ const aboutData = {
     {
       type: 'education',
       icon: GraduationCap,
-      date: '2024 â€“ Present',
+      date: '2024 – Present',
       title: 'BEng (Hons) Software Engineering',
       subtitle: "Queen's University Belfast, UK",
       description: 'Pursuing a rigorous curriculum at a prestigious Russell Group university, focusing on advanced software development principles and practices.'

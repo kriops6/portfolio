@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Briefcase, Users, Star } from 'lucide-react';
@@ -12,7 +12,7 @@ const experienceData = [
     role: "Student Ambassador",
     company: "Queen's University Belfast",
     location: "Belfast, UK",
-    years: "2024 â€“ Present",
+    years: "2024 – Present",
     description: "Representing the university at open days and events, providing guidance and support to prospective students.",
     points: [
       "Engaged with prospective students and families at university open days, showcasing campus life and academic programs.",
@@ -24,7 +24,7 @@ const experienceData = [
     role: "International Student Representative",
     company: "Queen's University Belfast",
     location: "Belfast, UK",
-    years: "2024 â€“ Present",
+    years: "2024 – Present",
     description: "Serving as a key liaison for the international student body, enhancing their university experience through proactive advocacy, event management, and mentorship.",
     points: [
       "Launched initiatives that significantly improved the integration and overall experience for international students.",
@@ -177,13 +177,13 @@ const ExperiencePage = () => {
           >
             <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl shadow-2xl border-2 border-white/30 p-6 backdrop-blur-xl">
               <div className="flex items-start space-x-4">
-                <span className="text-4xl">ðŸ˜‰</span>
+                <span className="text-4xl">😉</span>
                 <div>
                   <p className="text-white font-bold text-lg mb-1">
                     Psst... I'm available for opportunities
                   </p>
                   <p className="text-white/90 text-sm">
-                    Let's build something amazing together! ðŸš€
+                    Let's build something amazing together! 🚀
                   </p>
                 </div>
               </div>
