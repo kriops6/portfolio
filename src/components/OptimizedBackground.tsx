@@ -23,7 +23,7 @@ export default function OptimizedBackground({
   gradientColors = ['#047857', '#1e40af', '#7c3aed', '#be185d']
 }: OptimizedBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameIdRef = useRef<number | undefined>();
+  const animationFrameIdRef = useRef<number | undefined>(undefined);
   const particlesRef = useRef<Particle[]>([]);
   const timeRef = useRef(0);
   const lastFrameTimeRef = useRef(0);
