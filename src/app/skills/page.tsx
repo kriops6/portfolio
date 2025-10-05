@@ -448,7 +448,6 @@ export default function ArsenalPage() {
             transition={{ duration: 0.5 }}
             className={`p-6 rounded-xl ${isDarkMode ? 'bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-500/30' : 'bg-gradient-to-br from-purple-100 to-indigo-100 border border-purple-300/50'} backdrop-blur-sm`}
           >
-            <div className="text-4xl mb-4">👑</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Leadership & Diplomacy</h3>
             <ul className={`space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               <li>� Student Ambassador representing Queen's University Belfast</li>
@@ -466,7 +465,6 @@ export default function ArsenalPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className={`p-6 rounded-xl ${isDarkMode ? 'bg-gradient-to-br from-blue-900/40 to-cyan-900/40 border border-blue-500/30' : 'bg-gradient-to-br from-blue-100 to-cyan-100 border border-blue-300/50'} backdrop-blur-sm`}
           >
-            <div className="text-4xl mb-4">🎤</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Communication & Public Speaking</h3>
             <ul className={`space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               <li>� Delivered presentations at university open days and student events</li>
@@ -484,7 +482,6 @@ export default function ArsenalPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className={`p-6 rounded-xl ${isDarkMode ? 'bg-gradient-to-br from-green-900/40 to-emerald-900/40 border border-green-500/30' : 'bg-gradient-to-br from-green-100 to-emerald-100 border border-green-300/50'} backdrop-blur-sm`}
           >
-            <div className="text-4xl mb-4">🌍</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Multilingual & Cultural Intelligence</h3>
             <div className={`space-y-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               <div>
@@ -508,7 +505,6 @@ export default function ArsenalPage() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className={`p-6 rounded-xl ${isDarkMode ? 'bg-gradient-to-br from-orange-900/40 to-red-900/40 border border-orange-500/30' : 'bg-gradient-to-br from-orange-100 to-red-100 border border-orange-300/50'} backdrop-blur-sm`}
           >
-            <div className="text-4xl mb-4">🤝</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Teamwork & Collaboration</h3>
             <ul className={`space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               <li>� Collaborated with 15+ member councils to execute major events</li>
@@ -526,7 +522,6 @@ export default function ArsenalPage() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className={`p-6 rounded-xl ${isDarkMode ? 'bg-gradient-to-br from-yellow-900/40 to-amber-900/40 border border-yellow-500/30' : 'bg-gradient-to-br from-yellow-100 to-amber-100 border border-yellow-300/50'} backdrop-blur-sm`}
           >
-            <div className="text-4xl mb-4">🧠</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Problem Solving & Critical Thinking</h3>
             <ul className={`space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               <li>� Developed innovative solutions for student integration challenges</li>
@@ -544,7 +539,6 @@ export default function ArsenalPage() {
             transition={{ duration: 0.5, delay: 0.5 }}
             className={`p-6 rounded-xl ${isDarkMode ? 'bg-gradient-to-br from-pink-900/40 to-rose-900/40 border border-pink-500/30' : 'bg-gradient-to-br from-pink-100 to-rose-100 border border-pink-300/50'} backdrop-blur-sm`}
           >
-            <div className="text-4xl mb-4">🚀</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Adaptability & Growth Mindset</h3>
             <ul className={`space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               <li>� Successfully transitioned across countries and educational systems</li>
