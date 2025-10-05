@@ -20,7 +20,7 @@ export default function EasterEggs() {
       }
       idleTimerRef.current = setTimeout(() => {
         setShowYodaIdle(true);
-      }, 30000); // 30 seconds
+      }, 120000); // 2 minutes (120 seconds)
     };
 
     const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
