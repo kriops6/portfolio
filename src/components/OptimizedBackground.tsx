@@ -18,8 +18,8 @@ interface OptimizedBackgroundProps {
 }
 
 export default function OptimizedBackground({ 
-  particleCount = 30, // Reduced from 70-80
-  connectionDistance = 100, // Reduced from 120
+  particleCount = 50, // Increased for better visibility
+  connectionDistance = 120, 
   gradientColors = ['#047857', '#1e40af', '#7c3aed', '#be185d']
 }: OptimizedBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -84,14 +84,8 @@ export default function OptimizedBackground({
 
       timeRef.current += 0.005;
 
-      // Create gradient background
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradientColors.forEach((color, index) => {
-        gradient.addColorStop(index / (gradientColors.length - 1), color);
-      });
-
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Clear canvas with transparency
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Update and draw particles
       for (let i = 0; i < particles.length; i++) {
