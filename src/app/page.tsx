@@ -81,9 +81,9 @@ const TypeAnimation = () => {
   }, [currentText, currentIndex, isDeleting, texts]);
   
   return (
-    <span className="inline-flex items-baseline">
-      {currentText}
-      <span className={`inline-block w-0.5 h-[1em] ${isDarkMode ? 'bg-white' : 'bg-gray-800'} ml-1 animate-pulse`}>&nbsp;</span>
+    <span className="inline-flex items-baseline text-white">
+      <span className="text-white">{currentText}</span>
+      <span className="inline-block w-0.5 h-[1em] bg-white ml-1 animate-pulse">&nbsp;</span>
     </span>
   );
 };

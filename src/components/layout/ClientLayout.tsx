@@ -1,8 +1,8 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Code, Github, Mail } from 'lucide-react';
+import { Code, Github, Mail, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -34,6 +34,8 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
 // --- Header Component (Nav bubble updated) ---
 const Header = () => {
   const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
@@ -60,6 +62,7 @@ const Header = () => {
             </div>
           </Link>
 
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1 bg-black/20 rounded-full p-1">
             {navLinks.map((link) => (
               <Link
@@ -81,22 +84,79 @@ const Header = () => {
           </div>
 
           <div className="flex items-center space-x-3">
+            {/* Desktop Social Icons */}
             <a
               href="https://github.com/kriops6"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300 group border border-white/10"
+              className="hidden md:block p-3 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300 group border border-white/10"
             >
               <Github size={20} className="text-white" />
             </a>
             <a
               href="mailto:Krishnatmsv@gmail.com"
-              className="p-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-all duration-300 group shadow-lg"
+              className="hidden md:block p-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-all duration-300 group shadow-lg"
             >
               <Mail size={20} className="text-white" />
             </a>
+            
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-3 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X size={24} className="text-white" /> : <Menu size={24} className="text-white" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden mt-4 overflow-hidden"
+            >
+              <div className="flex flex-col space-y-2 pb-4">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
+                      pathname === link.href
+                        ? 'bg-white/20 text-white border border-white/30'
+                        : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+                
+                {/* Mobile Social Links */}
+                <div className="flex space-x-3 pt-4 border-t border-white/10">
+                  <a
+                    href="https://github.com/kriops6"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 p-3 rounded-lg bg-white/10 hover:bg-white/20 transition-all duration-300 text-center"
+                  >
+                    <Github size={20} className="text-white mx-auto" />
+                  </a>
+                  <a
+                    href="mailto:Krishnatmsv@gmail.com"
+                    className="flex-1 p-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 text-center"
+                  >
+                    <Mail size={20} className="text-white mx-auto" />
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );
