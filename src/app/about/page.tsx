@@ -1,12 +1,13 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Briefcase, GraduationCap, Award, Sparkles, Brain, Target, Rocket, Users } from 'lucide-react';
 import { useTheme } from '../../components/ThemeProvider';
+import OptimizedBackground from '../../components/OptimizedBackground';
 
 // --- Data specific to the About page ---
 const aboutData = {
-  summary: "Highly motivated and results-driven Software Engineering student at Queen's University Belfast (a Russell Group university) with a robust foundation in full-stack development, robotics, and engineering. Proven ability to translate complex technical requirements into innovative, scalable solutions, as evidenced by the independent design, development, and deployment of 'Spin State (Project Pulsor)'—a comprehensive collaborative platform. Beyond software, I'm pursuing deep knowledge in physics—progressing from classical mechanics through quantum mechanics toward particle physics—bringing a unique analytical perspective to technical challenges. Demonstrated leadership, strategic problem-solving, and cross-cultural communication skills, cultivated through significant academic achievements, competitive successes, and impactful student representation roles. Eager to leverage cutting-edge technology and interdisciplinary knowledge to drive innovation and foster collaborative success in dynamic software development environments.",
+  summary: "Highly motivated and results-driven Software Engineering student at Queen's University Belfast (a Russell Group university) with a robust foundation in full-stack development, robotics, and engineering. Proven ability to translate complex technical requirements into innovative, scalable solutions, as evidenced by the independent design, development, and deployment of 'Spin State (Project Pulsor)'â€”a comprehensive collaborative platform. Beyond software, I'm pursuing deep knowledge in physicsâ€”progressing from classical mechanics through quantum mechanics toward particle physicsâ€”bringing a unique analytical perspective to technical challenges. Demonstrated leadership, strategic problem-solving, and cross-cultural communication skills, cultivated through significant academic achievements, competitive successes, and impactful student representation roles. Eager to leverage cutting-edge technology and interdisciplinary knowledge to drive innovation and foster collaborative success in dynamic software development environments.",
   timeline: [
     {
       type: 'education',
@@ -19,7 +20,7 @@ const aboutData = {
     {
       type: 'education',
       icon: GraduationCap,
-      date: '2023 – 2024',
+      date: '2023 â€“ 2024',
       title: 'Diploma in Engineering',
       subtitle: 'Specialized Technical Institute',
       description: 'Completed an intensive diploma focusing on foundational engineering principles, applied mathematics, and hands-on workshop practices, providing a strong practical basis for advanced university studies.'
@@ -27,7 +28,7 @@ const aboutData = {
     {
       type: 'work',
       icon: Briefcase,
-      date: '2024 – Present',
+      date: '2024 â€“ Present',
       title: 'Student Ambassador & International Student Representative',
       subtitle: "Queen's University Belfast",
       description: 'Advocated for the international student community, supported 15+ major university events, and mentored hundreds of new international students, easing their academic and cultural transition.'
@@ -35,7 +36,7 @@ const aboutData = {
     {
       type: 'education',
       icon: GraduationCap,
-      date: '2024 – Present',
+      date: '2024 â€“ Present',
       title: 'BEng (Hons) Software Engineering',
       subtitle: "Queen's University Belfast, UK",
       description: 'Pursuing a rigorous curriculum at a prestigious Russell Group university, focusing on advanced software development principles and practices.'
@@ -47,103 +48,6 @@ const aboutData = {
     { icon: Users, title: 'Diplomacy Expert', description: 'Awarded "Excellent Delegate" at Model United Nations (MUN) with a unanimously passed resolution.', color: 'text-green-400' },
     { icon: Brain, title: 'National Chess Finalist', description: 'Secured 3rd Place in the National Chess Competition, showcasing strategic thinking.', color: 'text-pink-400' },
   ]
-};
-
-// --- Animated Background Component ---
-const AnimatedBackground = () => {
-  const canvasRef = useRef(null);
-  
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    let animationFrameId;
-    let time = 0;
-    
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    
-    const particles = [];
-    for (let i = 0; i < 50; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
-        hue: Math.random() * 360,
-      });
-    }
-    
-    const animate = () => {
-      time += 0.01;
-      
-      // Create gradient background
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, `hsl(${220 + Math.sin(time) * 15}, 45%, 25%)`);
-      gradient.addColorStop(0.3, `hsl(${260 + Math.cos(time) * 10}, 50%, 30%)`);
-      gradient.addColorStop(0.7, `hsl(${300 + Math.sin(time * 0.8) * 20}, 55%, 28%)`);
-      gradient.addColorStop(1, `hsl(${270 + Math.cos(time * 0.6) * 15}, 60%, 32%)`);
-      
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
-      // Update and draw particles
-      particles.forEach((particle, i) => {
-        particle.x += particle.vx + Math.sin(time + i) * 0.1;
-        particle.y += particle.vy + Math.cos(time + i) * 0.1;
-        
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
-        
-        particle.x = Math.max(0, Math.min(canvas.width, particle.x));
-        particle.y = Math.max(0, Math.min(canvas.height, particle.y));
-        
-        const alpha = 0.4 + Math.sin(time + i) * 0.3;
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${particle.hue + time * 30}, 80%, 75%, ${alpha})`;
-        ctx.fill();
-        
-        // Connect nearby particles
-        particles.slice(i + 1).forEach(other => {
-          const dx = particle.x - other.x;
-          const dy = particle.y - other.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          if (distance < 100) {
-            ctx.beginPath();
-            ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(other.x, other.y);
-            ctx.strokeStyle = `hsla(${particle.hue + time * 30}, 80%, 70%, ${0.15 * (1 - distance / 100)})`;
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-          }
-        });
-      });
-      
-      animationFrameId = requestAnimationFrame(animate);
-    };
-    
-    animate();
-    
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
-  
-  return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 w-full h-full -z-10"
-      style={{ background: 'linear-gradient(135deg, #3b4371 0%, #6366f1 25%, #8b5cf6 50%, #d8b4fe 75%, #f3e8ff 100%)' }}
-    />
-  );
 };
 
 // --- Reusable Animated Components ---
@@ -202,7 +106,11 @@ const AboutPage = () => {
         ? 'bg-gradient-to-br from-slate-800 via-indigo-900 to-purple-900 text-white' 
         : 'bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 text-gray-900'
     }`}>
-      <AnimatedBackground />
+      <OptimizedBackground 
+        particleCount={25} 
+        connectionDistance={85}
+        gradientColors={['#3b4371', '#6366f1', '#8b5cf6', '#d8b4fe']}
+      />
       
       <main className="relative z-10 container mx-auto px-6 py-24 sm:py-32">
         {/* --- Page Header --- */}

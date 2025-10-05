@@ -1,9 +1,10 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Briefcase, Users, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../components/ThemeProvider';
+import OptimizedBackground from '../../components/OptimizedBackground';
 
 // --- Data for the Experience page ---
 const experienceData = [
@@ -11,7 +12,7 @@ const experienceData = [
     role: "Student Ambassador",
     company: "Queen's University Belfast",
     location: "Belfast, UK",
-    years: "2024 – Present",
+    years: "2024 â€“ Present",
     description: "Representing the university at open days and events, providing guidance and support to prospective students.",
     points: [
       "Engaged with prospective students and families at university open days, showcasing campus life and academic programs.",
@@ -23,7 +24,7 @@ const experienceData = [
     role: "International Student Representative",
     company: "Queen's University Belfast",
     location: "Belfast, UK",
-    years: "2024 – Present",
+    years: "2024 â€“ Present",
     description: "Serving as a key liaison for the international student body, enhancing their university experience through proactive advocacy, event management, and mentorship.",
     points: [
       "Launched initiatives that significantly improved the integration and overall experience for international students.",
@@ -34,102 +35,6 @@ const experienceData = [
 ];
 
 // --- Animated Background Component ---
-const AnimatedBackground = () => {
-  const canvasRef = useRef(null);
-  
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    let animationFrameId;
-    let time = 0;
-    
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    
-    const particles = [];
-    for (let i = 0; i < 45; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6,
-        size: Math.random() * 2.5 + 1,
-        hue: Math.random() * 60 + 180, // Focus on blue-green-teal range
-      });
-    }
-    
-    const animate = () => {
-      time += 0.006;
-      
-      // Create gradient background with professional tones
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, `hsl(${200 + Math.sin(time) * 15}, 55%, 30%)`);
-      gradient.addColorStop(0.3, `hsl(${220 + Math.cos(time * 1.1) * 12}, 60%, 35%)`);
-      gradient.addColorStop(0.6, `hsl(${180 + Math.sin(time * 0.9) * 18}, 65%, 32%)`);
-      gradient.addColorStop(1, `hsl(${240 + Math.cos(time * 0.7) * 20}, 58%, 38%)`);
-      
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
-      // Update and draw particles
-      particles.forEach((particle, i) => {
-        particle.x += particle.vx + Math.sin(time + i * 0.5) * 0.15;
-        particle.y += particle.vy + Math.cos(time + i * 0.7) * 0.15;
-        
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
-        
-        particle.x = Math.max(0, Math.min(canvas.width, particle.x));
-        particle.y = Math.max(0, Math.min(canvas.height, particle.y));
-        
-        const alpha = 0.4 + Math.sin(time + i) * 0.3;
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${particle.hue + time * 25}, 75%, 70%, ${alpha})`;
-        ctx.fill();
-        
-        // Connect nearby particles
-        particles.slice(i + 1).forEach(other => {
-          const dx = particle.x - other.x;
-          const dy = particle.y - other.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          if (distance < 110) {
-            ctx.beginPath();
-            ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(other.x, other.y);
-            ctx.strokeStyle = `hsla(${particle.hue + time * 25}, 70%, 65%, ${0.12 * (1 - distance / 110)})`;
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-          }
-        });
-      });
-      
-      animationFrameId = requestAnimationFrame(animate);
-    };
-    
-    animate();
-    
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
-  
-  return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 w-full h-full -z-10 opacity-40"
-      style={{ background: 'linear-gradient(135deg, #1e40af 0%, #1e3a8a 25%, #0ea5e9 50%, #0891b2 75%, #0f766e 100%)' }}
-    />
-  );
-};
-
 // --- Reusable Animated Component ---
 const AnimatedCard = ({ children, delay = 0 }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -212,7 +117,11 @@ const ExperiencePage = () => {
   
   return (
     <div ref={pageRef} className={`min-h-screen ${isDarkMode ? 'bg-gradient-to-br from-blue-800 via-blue-900 to-teal-800' : 'bg-gradient-to-br from-blue-100 via-cyan-100 to-teal-100'} ${isDarkMode ? 'text-white' : 'text-gray-900'} overflow-hidden`}>
-      <AnimatedBackground />
+      <OptimizedBackground 
+        particleCount={20} 
+        connectionDistance={80}
+        gradientColors={['#1e40af', '#155e75', '#14b8a6', '#06b6d4']}
+      />
       
       <main className="relative z-10 container mx-auto px-6 py-24 sm:py-32">
         {/* --- Page Header --- */}
@@ -269,13 +178,13 @@ const ExperiencePage = () => {
           >
             <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl shadow-2xl border-2 border-white/30 p-6 backdrop-blur-xl">
               <div className="flex items-start space-x-4">
-                <span className="text-4xl">😉</span>
+                <span className="text-4xl">ðŸ˜‰</span>
                 <div>
                   <p className="text-white font-bold text-lg mb-1">
                     Psst... I'm available for opportunities
                   </p>
                   <p className="text-white/90 text-sm">
-                    Let's build something amazing together! 🚀
+                    Let's build something amazing together! ðŸš€
                   </p>
                 </div>
               </div>
