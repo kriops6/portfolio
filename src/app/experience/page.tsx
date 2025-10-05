@@ -34,9 +34,8 @@ const experienceData = [
   },
 ];
 
-// --- Animated Background Component ---
 // --- Reusable Animated Component ---
-const AnimatedCard = ({ children, delay = 0 }) => {
+const AnimatedCard = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
     const [isVisible, setIsVisible] = useState(false);
     const ref = useRef(null);
 

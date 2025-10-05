@@ -51,7 +51,7 @@ const aboutData = {
 };
 
 // --- Reusable Animated Components ---
-const AnimatedCard = ({ children, delay = 0 }) => {
+const AnimatedCard = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
     const [isVisible, setIsVisible] = useState(false);
     const ref = useRef(null);
 
