@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Code, Github, Mail, Menu, X } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 // --- Page Transition Wrapper Component ---
 const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -34,6 +34,7 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
 // --- Header Component (Nav bubble updated) ---
 const Header = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   const navLinks = [
@@ -44,6 +45,13 @@ const Header = () => {
     { name: 'Skills', href: '/skills' },
     { name: 'Contact', href: '/contact' },
   ];
+
+  // Preload all pages on mount for instant navigation
+  useEffect(() => {
+    navLinks.forEach(link => {
+      router.prefetch(link.href);
+    });
+  }, [router]);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-black/40 border-b border-white/20 shadow-2xl backdrop-blur-xl">
@@ -68,6 +76,7 @@ const Header = () => {
               <Link
                 key={link.name}
                 href={link.href}
+                prefetch={true}
                 className="relative px-6 py-2 rounded-full text-sm font-medium transition-colors duration-300 text-gray-300 hover:text-white"
               >
                 {pathname === link.href && (
@@ -125,6 +134,7 @@ const Header = () => {
                   <Link
                     key={link.name}
                     href={link.href}
+                    prefetch={true}
                     onClick={() => setMobileMenuOpen(false)}
                     className={`px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
                       pathname === link.href
