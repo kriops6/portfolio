@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { SeasonalThemeProvider } from '../components/SeasonalThemeProvider';
 import { SeasonalThemeWheel } from '../components/SeasonalThemeWheel';
+import { SeasonalBackground } from '../components/SeasonalBackground';
 import EasterEggs from '../components/EasterEggs';
 import KonamiCodeDetector from '../components/KonamiCodeDetector';
 import TypingTestGame from '../components/TypingTestGame';
@@ -135,6 +136,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="min-h-screen">
         <SeasonalThemeProvider>
+          <SeasonalBackground />
           <Header />
           <PageTransitionWrapper>
             {children}

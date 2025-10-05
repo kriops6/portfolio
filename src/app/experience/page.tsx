@@ -115,11 +115,10 @@ const ExperiencePage = () => {
   }, [showRecruiterToast]);
   
   return (
-    <div ref={pageRef} className={`min-h-screen ${isDarkMode ? 'bg-gradient-to-br from-blue-800 via-blue-900 to-teal-800' : 'bg-gradient-to-br from-blue-100 via-cyan-100 to-teal-100'} ${isDarkMode ? 'text-white' : 'text-gray-900'} overflow-hidden`}>
+    <div ref={pageRef} className="min-h-screen overflow-hidden">
       <OptimizedBackground 
         particleCount={20} 
         connectionDistance={80}
-        gradientColors={['#1e40af', '#155e75', '#14b8a6', '#06b6d4']}
       />
       
       <main className="relative z-10 container mx-auto px-6 py-24 sm:py-32">

@@ -1,5 +1,6 @@
 'use client';
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 export type SeasonalTheme = 'regular' | 'summer' | 'autumn' | 'winter' | 'spring';
 
@@ -108,22 +109,22 @@ const themeConfigs: Record<SeasonalTheme, ThemeConfig> = {
   spring: {
     name: 'Spring Bloom',
     colors: {
-      primary: '#4ade80', // green-400
-      secondary: '#86efac', // green-300
-      accent: '#22c55e', // green-500
-      background: '#0a1f0a',
-      backgroundGradient: 'from-emerald-950 via-green-950 to-teal-950',
-      text: '#f0fdf4', // green-50
-      textSecondary: '#bbf7d0', // green-200
-      border: 'rgba(74, 222, 128, 0.3)',
-      cardBg: 'rgba(5, 46, 22, 0.5)', // green-950/50
-      cardBorder: 'rgba(74, 222, 128, 0.4)',
+      primary: '#ffc9e3', // pink-300
+      secondary: '#ffb3d9', // pink-400
+      accent: '#ff9ec7', // pink-500
+      background: '#1a0a14',
+      backgroundGradient: 'from-pink-950 via-rose-950 to-purple-950',
+      text: '#fff0f8', // pink-50
+      textSecondary: '#ffc9e3', // pink-300
+      border: 'rgba(255, 201, 227, 0.3)',
+      cardBg: 'rgba(46, 5, 30, 0.5)', // pink-950/50
+      cardBorder: 'rgba(255, 201, 227, 0.4)',
     },
     fonts: {
       heading: '"Times New Roman", serif',
       body: 'Georgia, serif',
     },
-    particleColors: ['#4ade80', '#86efac', '#10b981'],
+    particleColors: ['#ffc9e3', '#ffb3d9', '#ffe0f0'],
   },
 };
 
@@ -146,15 +147,23 @@ const ThemeContext = createContext<ThemeContextType>({
 export const useTheme = () => useContext(ThemeContext);
 
 export function SeasonalThemeProvider({ children }: { children: React.ReactNode }) {
-  const [currentTheme, setCurrentTheme] = useState<SeasonalTheme>('regular');
+  const pathname = usePathname();
+  const isPhysicsPage = pathname === '/physics';
+  
+  const [currentTheme, setCurrentTheme] = useState<SeasonalTheme>(() => {
+    // Initialize from localStorage if available (client-side only)
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('seasonalTheme') as SeasonalTheme;
+      if (saved && themeConfigs[saved]) {
+        return saved;
+      }
+    }
+    return 'regular';
+  });
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const savedTheme = localStorage.getItem('seasonalTheme') as SeasonalTheme;
-    if (savedTheme && themeConfigs[savedTheme]) {
-      setCurrentTheme(savedTheme);
-    }
   }, []);
 
   const setTheme = (theme: SeasonalTheme) => {
@@ -189,8 +198,18 @@ export function SeasonalThemeProvider({ children }: { children: React.ReactNode 
     root.style.setProperty('--font-body', themeConfig.fonts.body);
   }, [themeConfig, mounted]);
 
+  // Prevent flash by not rendering until mounted on client
   if (!mounted) {
-    return <>{children}</>;
+    return null;
+  }
+
+  // For /physics page, render children without seasonal theming
+  if (isPhysicsPage) {
+    return (
+      <ThemeContext.Provider value={{ currentTheme, themeConfig, setTheme, isDarkMode, toggleTheme }}>
+        {children}
+      </ThemeContext.Provider>
+    );
   }
 
   return (

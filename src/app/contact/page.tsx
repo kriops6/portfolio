@@ -54,15 +54,10 @@ const ContactPage = () => {
   };
   
   return (
-    <div className={`min-h-screen overflow-hidden transition-colors duration-500 ${
-      isDarkMode 
-        ? 'bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 text-white' 
-        : 'bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 text-gray-900'
-    }`}>
+    <div className="min-h-screen overflow-hidden transition-colors duration-500">
       <OptimizedBackground 
         particleCount={20} 
         connectionDistance={85}
-        gradientColors={['#6366f1', '#8b5cf6', '#ec4899', '#06b6d4']}
       />
       
       <main className="relative z-10 container mx-auto px-6 py-24 sm:py-32 overflow-hidden">

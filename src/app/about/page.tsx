@@ -101,15 +101,10 @@ const AboutPage = () => {
   const { isDarkMode } = useTheme();
   
   return (
-    <div className={`min-h-screen overflow-hidden transition-colors duration-500 ${
-      isDarkMode 
-        ? 'bg-gradient-to-br from-slate-800 via-indigo-900 to-purple-900 text-white' 
-        : 'bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 text-gray-900'
-    }`}>
+    <div className="min-h-screen overflow-hidden transition-colors duration-500">
       <OptimizedBackground 
         particleCount={25} 
         connectionDistance={85}
-        gradientColors={['#3b4371', '#6366f1', '#8b5cf6', '#d8b4fe']}
       />
       
       <main className="relative z-10 container mx-auto px-6 py-24 sm:py-32">

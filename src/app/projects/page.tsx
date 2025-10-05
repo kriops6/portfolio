@@ -125,15 +125,10 @@ const ProjectsPage = () => {
     : projectsData.filter((p) => p.category === activeFilter);
 
   return (
-    <div className={`min-h-screen overflow-hidden transition-colors duration-500 ${
-      isDarkMode 
-        ? 'bg-gradient-to-br from-green-800 via-blue-900 to-purple-900 text-white' 
-        : 'bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 text-gray-900'
-    }`}>
+    <div className="min-h-screen overflow-hidden transition-colors duration-500">
       <OptimizedBackground 
         particleCount={25} 
         connectionDistance={90}
-        gradientColors={['#047857', '#1e40af', '#7c3aed', '#be185d']}
       />
       
       <main className="relative z-10 container mx-auto px-6 py-24 sm:py-32">

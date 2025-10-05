@@ -109,7 +109,7 @@ const featuredProjects = [
 ];
 
 export default function HomePage() {
-  const { themeConfig } = useTheme();
+  const { themeConfig, isDarkMode } = useTheme();
   
   return (
     <div className="min-h-screen w-full relative">

@@ -124,11 +124,7 @@ export default function ArsenalPage() {
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-500 ${
-      isDarkMode 
-        ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white' 
-        : 'bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 text-gray-900'
-    }`}>
+    <div className="min-h-screen transition-colors duration-500">
       <div className="container mx-auto px-6 py-16">
         {/* Header */}
         <motion.div

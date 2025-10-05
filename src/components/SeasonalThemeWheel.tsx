@@ -13,6 +13,10 @@ const themeIcons: Record<SeasonalTheme, { icon: React.ElementType; color: string
   spring: { icon: Flower, color: '#4ade80', label: 'Spring' },
 };
 
+const ORBIT_RADIUS = 72; // distance from center to option bubble centers
+const OPTION_SIZE = 56; // w-14 / h-14
+const RING_RADIUS = ORBIT_RADIUS; // ring follows the same arc as option centers
+
 export function SeasonalThemeWheel() {
   const { currentTheme, setTheme } = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -23,7 +27,7 @@ export function SeasonalThemeWheel() {
   // Calculate positions for the wheel (circular arrangement)
   const getThemePosition = (index: number, total: number) => {
     const angle = (index * 360) / total - 90; // Start from top
-    const radius = 80; // Distance from center
+    const radius = ORBIT_RADIUS;
     const rad = (angle * Math.PI) / 180;
     return {
       x: Math.cos(rad) * radius,
@@ -33,7 +37,7 @@ export function SeasonalThemeWheel() {
 
   return (
     <div
-      className="fixed bottom-8 right-8 z-50"
+      className="fixed bottom-24 right-24 z-50"
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}
     >
@@ -95,14 +99,12 @@ export function SeasonalThemeWheel() {
                 return (
                   <motion.button
                     key={theme}
-                    initial={{ scale: 0, opacity: 0, x: 0, y: 0 }}
+                    initial={{ scale: 0, opacity: 0 }}
                     animate={{
                       scale: 1,
                       opacity: 1,
-                      x: pos.x,
-                      y: pos.y,
                     }}
-                    exit={{ scale: 0, opacity: 0, x: 0, y: 0 }}
+                    exit={{ scale: 0, opacity: 0 }}
                     transition={{
                       type: 'spring',
                       stiffness: 300,
@@ -115,12 +117,21 @@ export function SeasonalThemeWheel() {
                       setTheme(theme);
                       setIsExpanded(false);
                     }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full shadow-xl backdrop-blur-xl border-2 flex flex-col items-center justify-center group"
+                    className="absolute w-14 h-14 rounded-full shadow-xl backdrop-blur-xl border-2 flex flex-col items-center justify-center group"
                     style={{
                       backgroundColor: `${themeIcons[theme].color}20`,
                       borderColor: themeIcons[theme].color,
+                      // Position bubble center exactly ORBIT_RADIUS distance from button center
+                      // Button center: (32, 32), Bubble center should be at (32 + pos.x, 32 + pos.y)
+                      left: `${32 + pos.x}px`,
+                      top: `${32 + pos.y}px`,
+                      // Center the 56px bubble on that point
+                      marginLeft: '-28px',  // Half of 56px
+                      marginTop: '-28px',   // Half of 56px
                     }}
                   >
+                    {/* Debug: Show center point */}
+                    <div className="absolute w-1 h-1 bg-red-500 rounded-full" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
                     {/* Theme glow */}
                     <motion.div
                       className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
@@ -148,38 +159,31 @@ export function SeasonalThemeWheel() {
                 );
               })}
 
-              {/* Center connecting lines */}
+              {/* Orbital ring that passes through the option bubble centers */}
               <motion.div
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 0.2 }}
+                animate={{ opacity: 0.35 }}
                 exit={{ opacity: 0 }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full border-2 border-dashed pointer-events-none"
-                style={{ borderColor: themeIcons[currentTheme].color }}
-              />
+                className="absolute rounded-full border-2 border-dashed pointer-events-none"
+                style={{ 
+                  borderColor: themeIcons[currentTheme].color,
+                  // Ring with exact radius matching orbit
+                  width: `${RING_RADIUS * 2}px`,
+                  height: `${RING_RADIUS * 2}px`,
+                  // Position at button center (32px, 32px)
+                  left: '32px',
+                  top: '32px',
+                  marginLeft: `-${RING_RADIUS}px`,
+                  marginTop: `-${RING_RADIUS}px`,
+                }}
+              >
+                {/* Debug: Center point marker */}
+                <div className="absolute w-2 h-2 bg-red-500 rounded-full" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
+              </motion.div>
             </>
           )}
         </AnimatePresence>
       </motion.div>
-
-      {/* Theme name tooltip */}
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            className="absolute -top-16 right-0 px-4 py-2 rounded-lg shadow-xl backdrop-blur-xl border whitespace-nowrap"
-            style={{
-              backgroundColor: `${themeIcons[currentTheme].color}20`,
-              borderColor: themeIcons[currentTheme].color,
-              color: themeIcons[currentTheme].color,
-            }}
-          >
-            <p className="text-sm font-bold">Current: {themeIcons[currentTheme].label}</p>
-            <p className="text-xs opacity-75">Hover to change</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
