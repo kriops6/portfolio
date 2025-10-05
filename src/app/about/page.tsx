@@ -115,7 +115,7 @@ const AboutPage = () => {
       <main className="relative z-10 container mx-auto px-6 py-24 sm:py-32">
         {/* --- Page Header --- */}
         <AnimatedCard>
-          <div className="text-center mb-20">
+          <div className="text-center mb-10">
             <h1 className="text-6xl md:text-8xl font-black mb-4">
               <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                 My Journey
@@ -129,7 +129,7 @@ const AboutPage = () => {
 
         {/* --- Professional Summary --- */}
         <AnimatedCard delay={2}>
-          <section className="mb-24 max-w-4xl mx-auto">
+          <section className="mb-12 max-w-4xl mx-auto">
             <div className={`relative p-8 ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white/60 border-gray-200/50'} backdrop-blur-xl rounded-3xl border shadow-2xl`}>
               <div className="absolute -top-5 -left-5 w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center transform -rotate-12">
                   <Brain size={32} className="text-white"/>
@@ -143,7 +143,7 @@ const AboutPage = () => {
         </AnimatedCard>
 
         {/* --- Timeline Section --- */}
-        <section className="mb-24">
+        <section className="mb-12">
           <AnimatedCard delay={3}>
               <div className="text-center mb-16">
                   <h2 className={`text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Career & Education Timeline</h2>

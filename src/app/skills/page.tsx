@@ -1,10 +1,9 @@
-Ôªø'use client';
+'use client';
 import { motion, useInView } from 'framer-motion';
 import { useState, useRef } from 'react';
 import { Sparkles, Code, Server, Cloud, Cpu, Brain, Zap, Database, Globe, BarChart3, Activity } from 'lucide-react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Legend, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { useTheme } from '../../components/ThemeProvider';
-import AnimatedCounter from '../../components/AnimatedCounter';
 
 // Radar chart data for main skill areas
 const arsenalData = [
@@ -357,9 +356,9 @@ export default function ArsenalPage() {
                             <div className="font-semibold mb-1">{skill.name}</div>
                             <div className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>Proficiency: {skill.level}%</div>
                             <div className={`text-[10px] mt-1 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                              {skill.level >= 90 ? '‚≠ê Expert Level' : 
-                               skill.level >= 75 ? 'üî• Advanced' : 
-                               skill.level >= 50 ? 'üí™ Intermediate' : 'üìö Learning'}
+                              {skill.level >= 90 ? '? Expert Level' : 
+                               skill.level >= 75 ? '?? Advanced' : 
+                               skill.level >= 50 ? '?? Intermediate' : '?? Learning'}
                             </div>
                           </div>
                         </div>
@@ -408,24 +407,24 @@ export default function ArsenalPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-400">
-                <AnimatedCounter end={2} suffix="+" duration={2000} />
+                2+
               </div>
               <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Years Experience</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-green-400">
-                <AnimatedCounter end={25} suffix="+" duration={2000} />
+                25+
               </div>
               <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Technologies</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-400">
-                <AnimatedCounter end={20} suffix="+" duration={2000} />
+                20+
               </div>
               <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Projects</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-400">‚àû</div>
+              <div className="text-2xl font-bold text-yellow-400">8</div>
               <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Learning Mode</div>
             </div>
           </div>
@@ -459,13 +458,13 @@ export default function ArsenalPage() {
             transition={{ duration: 0.5 }}
             className={`p-6 rounded-xl ${isDarkMode ? 'bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-500/30' : 'bg-gradient-to-br from-purple-100 to-indigo-100 border border-purple-300/50'} backdrop-blur-sm`}
           >
-            <div className="text-4xl mb-4">üéØ</div>
+            <div className="text-4xl mb-4">??</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Leadership & Diplomacy</h3>
             <ul className={`space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              <li>‚Ä¢ Student Ambassador representing Queen's University Belfast</li>
-              <li>‚Ä¢ International Student Representative serving diverse communities</li>
-              <li>‚Ä¢ Led 15+ member teams in high-pressure event coordination</li>
-              <li>‚Ä¢ Skilled in conflict resolution and consensus building</li>
+              <li>ï Student Ambassador representing Queen's University Belfast</li>
+              <li>ï International Student Representative serving diverse communities</li>
+              <li>ï Led 15+ member teams in high-pressure event coordination</li>
+              <li>ï Skilled in conflict resolution and consensus building</li>
             </ul>
           </motion.div>
 
@@ -477,13 +476,13 @@ export default function ArsenalPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className={`p-6 rounded-xl ${isDarkMode ? 'bg-gradient-to-br from-blue-900/40 to-cyan-900/40 border border-blue-500/30' : 'bg-gradient-to-br from-blue-100 to-cyan-100 border border-blue-300/50'} backdrop-blur-sm`}
           >
-            <div className="text-4xl mb-4">üí¨</div>
+            <div className="text-4xl mb-4">??</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Communication & Public Speaking</h3>
             <ul className={`space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              <li>‚Ä¢ Delivered presentations at university open days and student events</li>
-              <li>‚Ä¢ Experienced in facilitating cross-cultural dialogue</li>
-              <li>‚Ä¢ Mentored hundreds of students through complex transitions</li>
-              <li>‚Ä¢ Clear and effective communicator across diverse audiences</li>
+              <li>ï Delivered presentations at university open days and student events</li>
+              <li>ï Experienced in facilitating cross-cultural dialogue</li>
+              <li>ï Mentored hundreds of students through complex transitions</li>
+              <li>ï Clear and effective communicator across diverse audiences</li>
             </ul>
           </motion.div>
 
@@ -495,19 +494,19 @@ export default function ArsenalPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className={`p-6 rounded-xl ${isDarkMode ? 'bg-gradient-to-br from-green-900/40 to-emerald-900/40 border border-green-500/30' : 'bg-gradient-to-br from-green-100 to-emerald-100 border border-green-300/50'} backdrop-blur-sm`}
           >
-            <div className="text-4xl mb-4">üåç</div>
+            <div className="text-4xl mb-4">??</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Multilingual & Cultural Intelligence</h3>
             <div className={`space-y-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               <div>
                 <p className="font-semibold mb-2">Languages:</p>
                 <ul className="space-y-1 ml-4">
-                  <li>‚Ä¢ Tamil (Native)</li>
-                  <li>‚Ä¢ English (IELTS 8.0)</li>
-                  <li>‚Ä¢ Hindi (Fluent)</li>
-                  <li>‚Ä¢ Japanese (Basic)</li>
+                  <li>ï Tamil (Native)</li>
+                  <li>ï English (IELTS 8.0)</li>
+                  <li>ï Hindi (Fluent)</li>
+                  <li>ï Japanese (Basic)</li>
                 </ul>
               </div>
-              <p>‚Ä¢ International Student Representative serving diverse communities</p>
+              <p>ï International Student Representative serving diverse communities</p>
             </div>
           </motion.div>
 
@@ -519,13 +518,13 @@ export default function ArsenalPage() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className={`p-6 rounded-xl ${isDarkMode ? 'bg-gradient-to-br from-orange-900/40 to-red-900/40 border border-orange-500/30' : 'bg-gradient-to-br from-orange-100 to-red-100 border border-orange-300/50'} backdrop-blur-sm`}
           >
-            <div className="text-4xl mb-4">ü§ù</div>
+            <div className="text-4xl mb-4">??</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Teamwork & Collaboration</h3>
             <ul className={`space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              <li>‚Ä¢ Collaborated with 15+ member councils to execute major events</li>
-              <li>‚Ä¢ Coordinated logistics for 20+ annual school programs (1,000+ attendees)</li>
-              <li>‚Ä¢ Built consensus across diverse stakeholder groups</li>
-              <li>‚Ä¢ Fostered inclusive environments for international students</li>
+              <li>ï Collaborated with 15+ member councils to execute major events</li>
+              <li>ï Coordinated logistics for 20+ annual school programs (1,000+ attendees)</li>
+              <li>ï Built consensus across diverse stakeholder groups</li>
+              <li>ï Fostered inclusive environments for international students</li>
             </ul>
           </motion.div>
 
@@ -537,13 +536,13 @@ export default function ArsenalPage() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className={`p-6 rounded-xl ${isDarkMode ? 'bg-gradient-to-br from-yellow-900/40 to-amber-900/40 border border-yellow-500/30' : 'bg-gradient-to-br from-yellow-100 to-amber-100 border border-yellow-300/50'} backdrop-blur-sm`}
           >
-            <div className="text-4xl mb-4">üß†</div>
+            <div className="text-4xl mb-4">??</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Problem Solving & Critical Thinking</h3>
             <ul className={`space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              <li>‚Ä¢ Developed innovative solutions for student integration challenges</li>
-              <li>‚Ä¢ Managed event logistics with tight deadlines and constraints</li>
-              <li>‚Ä¢ Adapted quickly to multicultural academic environments</li>
-              <li>‚Ä¢ Applied systematic thinking from physics to solve complex problems</li>
+              <li>ï Developed innovative solutions for student integration challenges</li>
+              <li>ï Managed event logistics with tight deadlines and constraints</li>
+              <li>ï Adapted quickly to multicultural academic environments</li>
+              <li>ï Applied systematic thinking from physics to solve complex problems</li>
             </ul>
           </motion.div>
 
@@ -555,13 +554,13 @@ export default function ArsenalPage() {
             transition={{ duration: 0.5, delay: 0.5 }}
             className={`p-6 rounded-xl ${isDarkMode ? 'bg-gradient-to-br from-pink-900/40 to-rose-900/40 border border-pink-500/30' : 'bg-gradient-to-br from-pink-100 to-rose-100 border border-pink-300/50'} backdrop-blur-sm`}
           >
-            <div className="text-4xl mb-4">üöÄ</div>
+            <div className="text-4xl mb-4">??</div>
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Adaptability & Growth Mindset</h3>
             <ul className={`space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              <li>‚Ä¢ Successfully transitioned across countries and educational systems</li>
-              <li>‚Ä¢ Continuously learning new technologies and methodologies</li>
-              <li>‚Ä¢ Studying physics from mechanics to quantum mechanics</li>
-              <li>‚Ä¢ Embraced challenges as opportunities for growth</li>
+              <li>ï Successfully transitioned across countries and educational systems</li>
+              <li>ï Continuously learning new technologies and methodologies</li>
+              <li>ï Studying physics from mechanics to quantum mechanics</li>
+              <li>ï Embraced challenges as opportunities for growth</li>
             </ul>
           </motion.div>
         </div>
