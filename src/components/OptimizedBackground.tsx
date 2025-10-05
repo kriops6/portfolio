@@ -32,7 +32,7 @@ export default function OptimizedBackground({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d', { alpha: false });
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
     let isVisible = true;
@@ -59,7 +59,7 @@ export default function OptimizedBackground({
           y: Math.random() * canvas.height,
           vx: (Math.random() - 0.5) * 0.3,
           vy: (Math.random() - 0.5) * 0.3,
-          size: Math.random() * 2 + 0.8,
+          size: Math.random() * 3 + 1.5, // Increased size
           hue: Math.random() * 180 + 180,
         });
       }
@@ -102,12 +102,12 @@ export default function OptimizedBackground({
         particle.x = Math.max(0, Math.min(canvas.width, particle.x));
         particle.y = Math.max(0, Math.min(canvas.height, particle.y));
 
-        const alpha = 0.4 + Math.sin(timeRef.current + i) * 0.2;
+        const alpha = 0.6 + Math.sin(timeRef.current + i) * 0.3; // Increased opacity
         
         // Draw particle
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${particle.hue + timeRef.current * 20}, 70%, 65%, ${alpha})`;
+        ctx.fillStyle = `hsla(${particle.hue + timeRef.current * 20}, 80%, 70%, ${alpha})`;
         ctx.fill();
 
         // Optimized connection drawing - only check ahead
@@ -122,7 +122,8 @@ export default function OptimizedBackground({
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(other.x, other.y);
-            ctx.strokeStyle = `hsla(${particle.hue}, 60%, 60%, ${0.1 * (1 - dist / connectionDistance)})`;
+            ctx.strokeStyle = `hsla(${particle.hue}, 70%, 65%, ${0.3 * (1 - dist / connectionDistance)})`; // Increased line opacity
+            ctx.lineWidth = 1.5; // Thicker lines
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
