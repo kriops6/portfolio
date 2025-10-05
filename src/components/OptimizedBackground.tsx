@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useTheme } from './ThemeProvider';
 
 interface Particle {
   x: number;
@@ -22,6 +23,7 @@ export default function OptimizedBackground({
   connectionDistance = 120, 
   gradientColors = ['#047857', '#1e40af', '#7c3aed', '#be185d']
 }: OptimizedBackgroundProps) {
+  const { isDarkMode } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameIdRef = useRef<number | undefined>(undefined);
   const particlesRef = useRef<Particle[]>([]);
@@ -84,11 +86,17 @@ export default function OptimizedBackground({
 
       timeRef.current += 0.005;
 
-      // Draw gradient background
+      // Draw gradient background (theme-aware)
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, '#1e1b4b'); // indigo-950
-      gradient.addColorStop(0.5, '#581c87'); // purple-900
-      gradient.addColorStop(1, '#1e3a8a'); // blue-900
+      if (isDarkMode) {
+        gradient.addColorStop(0, '#1e1b4b'); // indigo-950
+        gradient.addColorStop(0.5, '#581c87'); // purple-900
+        gradient.addColorStop(1, '#1e3a8a'); // blue-900
+      } else {
+        gradient.addColorStop(0, '#dbeafe'); // blue-50
+        gradient.addColorStop(0.5, '#fae8ff'); // purple-50
+        gradient.addColorStop(1, '#fce7f3'); // pink-50
+      }
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -147,7 +155,7 @@ export default function OptimizedBackground({
         cancelAnimationFrame(animationFrameIdRef.current);
       }
     };
-  }, [particleCount, connectionDistance, gradientColors]);
+  }, [particleCount, connectionDistance, gradientColors, isDarkMode]);
 
   return (
     <canvas
