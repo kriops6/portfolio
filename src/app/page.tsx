@@ -1,45 +1,33 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Sparkles, ArrowRight, Zap, ChevronDown, Brain } from 'lucide-react';
 import { useTheme } from '../components/ThemeProvider';
 import OptimizedBackground from '../components/OptimizedBackground';
 
-// --- Reusable Animated Component ---
-const AnimatedSection = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
-    const [isVisible, setIsVisible] = useState(false);
-    const ref = useRef(null);
+// Motion.dev spring config for smooth animations
+const springConfig = { stiffness: 100, damping: 20, restDelta: 0.001 };
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                    observer.disconnect();
-                }
-            },
-            { threshold: 0.1 }
-        );
+// Stagger container for child animations
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    }
+  }
+};
 
-        if (ref.current) observer.observe(ref.current);
-        return () => {
-            if (ref.current) observer.unobserve(ref.current);
-        };
-    }, []);
-
-    return (
-        <div
-            ref={ref}
-            className={`transition-all duration-700 ease-out ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-            }`}
-            style={{
-                transitionDelay: `${delay * 100}ms`
-            }}
-        >
-            {children}
-        </div>
-    );
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring" as const, ...springConfig }
+  }
 };
 
 // Custom typing animation component
@@ -131,61 +119,104 @@ export default function HomePage() {
       <div className="relative z-10 pt-20">
         {/* Hero Section */}
         <section className="min-h-screen flex items-center justify-center px-6 py-20 text-center">
-          <div className="max-w-7xl mx-auto">
-              <AnimatedSection>
+          <motion.div 
+            className="max-w-7xl mx-auto"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+              <motion.div variants={itemVariants}>
                   <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 leading-tight">
-                    <span className="block bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                    <motion.span 
+                      className="block bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ type: "spring", ...springConfig, delay: 0.2 }}
+                    >
                       KRISHNA
-                    </span>
-                    <span className="block bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+                    </motion.span>
+                    <motion.span 
+                      className="block bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ type: "spring", ...springConfig, delay: 0.4 }}
+                    >
                       THIRUMALAI
-                    </span>
+                    </motion.span>
                   </h1>
-              </AnimatedSection>
+              </motion.div>
               
-              <AnimatedSection delay={2}>
+              <motion.div variants={itemVariants}>
                   <div className={`text-2xl md:text-4xl lg:text-5xl font-light ${isDarkMode ? 'text-gray-200' : 'text-gray-700'} mb-8 h-16 md:h-20`}>
                       <span className={`bg-gradient-to-r ${isDarkMode ? 'from-cyan-400 to-blue-400' : 'from-cyan-600 to-blue-600'} bg-clip-text text-transparent`}>
                         <TypeAnimation />
                       </span>
                   </div>
-              </AnimatedSection>
+              </motion.div>
               
-              <AnimatedSection delay={4}>
+              <motion.div variants={itemVariants}>
                   <p className={`text-lg md:text-xl lg:text-2xl ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} max-w-5xl mx-auto mb-12 leading-relaxed`}>
                     From engineering <span className={`${isDarkMode ? 'text-purple-300' : 'text-purple-700'} font-semibold`}>autonomous swarm drone systems</span> with intelligent docking to developing <span className={`${isDarkMode ? 'text-cyan-300' : 'text-cyan-700'} font-semibold`}>AI-powered industrial inspection tools</span> and <span className={`${isDarkMode ? 'text-green-300' : 'text-green-700'} font-semibold`}>assistive wearables for the visually impaired</span>, I transform complex technical challenges into innovative, real-world solutions that push the boundaries of robotics, AI, and human-computer interaction.
                   </p>
-              </AnimatedSection>
+              </motion.div>
               
-              <AnimatedSection delay={6}>
+              <motion.div 
+                variants={itemVariants}
+                whileHover={{ scale: 1.02 }}
+              >
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
-                    <a href="/projects" className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 rounded-xl font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50">
+                    <motion.a 
+                      href="/projects" 
+                      className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 rounded-xl font-bold text-lg transition-all duration-300"
+                      whileHover={{ scale: 1.05, boxShadow: "0 0 50px rgba(168, 85, 247, 0.5)" }}
+                      whileTap={{ scale: 0.95 }}
+                    >
                       <span className="relative z-10 flex items-center space-x-3">
                         <Sparkles size={24} />
                         <span>Explore My Projects</span>
                       </span>
-                    </a>
-                    <a href="/contact" className="group px-8 py-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl font-bold text-lg hover:bg-white/20 transition-all duration-300 hover:scale-105">
+                    </motion.a>
+                    <motion.a 
+                      href="/contact" 
+                      className="group px-8 py-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl font-bold text-lg transition-all duration-300"
+                      whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
+                      whileTap={{ scale: 0.95 }}
+                    >
                       <span className="relative z-10 flex items-center space-x-3">
                         <Zap size={24} />
                         <span>Get In Touch</span>
                       </span>
-                    </a>
+                    </motion.a>
                   </div>
-              </AnimatedSection>
+              </motion.div>
               
-              <div className="mt-20">
+              <motion.div 
+                className="mt-20"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1, ...springConfig }}
+              >
                   <a href="#about-snippet" className={`flex flex-col items-center space-y-2 ${isDarkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} text-sm transition-colors duration-300`}>
                       <span>Discover more</span>
-                      <ChevronDown size={28} className="animate-bounce" />
+                      <motion.div
+                        animate={{ y: [0, 10, 0] }}
+                        transition={{ repeat: Infinity, duration: 1.5 }}
+                      >
+                        <ChevronDown size={28} />
+                      </motion.div>
                   </a>
-              </div>
-          </div>
+              </motion.div>
+          </motion.div>
         </section>
 
         {/* About Me Snippet */}
         <section id="about-snippet" className="py-20 px-6">
-          <AnimatedSection>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ type: "spring" as const, ...springConfig }}
+          >
               <div className={`max-w-4xl mx-auto text-center p-8 ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white/60 border-gray-200/50 hover:bg-white/80'} backdrop-blur-xl border rounded-3xl transition-all duration-300`}>
                   <Brain className={`mx-auto h-12 w-12 ${isDarkMode ? 'text-cyan-400' : 'text-cyan-600'} mb-6`}/>
                   <h2 className={`text-3xl md:text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-6`}>A Multi-Disciplinary Approach</h2>
@@ -193,23 +224,43 @@ export default function HomePage() {
                       I am a software engineering student with a deep passion for building intelligent systems. My work spans the full stack of web development, from crafting responsive user interfaces with React to architecting robust back-end services, and extends into the physical world with robotics and mechatronics. Beyond code, I'm actively studying physics—from classical mechanics through quantum mechanics—with aspirations to achieve deep knowledge in particle physics, bringing a unique analytical lens to every challenge.
                   </p>
               </div>
-          </AnimatedSection>
+          </motion.div>
         </section>
 
         {/* Featured Projects Section */}
         <section className="py-20 px-6">
           <div className="max-w-7xl mx-auto">
-              <AnimatedSection>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ type: "spring" as const, ...springConfig }}
+              >
                   <div className="text-center mb-16">
                       <h2 className={`text-3xl md:text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-4`}>Featured Projects</h2>
                       <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>A glimpse into my recent work.</p>
                   </div>
-              </AnimatedSection>
+              </motion.div>
               
               <div className="grid md:grid-cols-2 gap-8">
                   {featuredProjects.map((project, index) => (
-                      <AnimatedSection key={project.title} delay={index + 2}>
-                          <a href={project.link} className={`group block h-full p-6 ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-purple-400/50' : 'bg-white/60 border-gray-200/50 hover:bg-white/80 hover:border-purple-400/80'} backdrop-blur-xl border rounded-2xl transition-all duration-300 hover:-translate-y-2`}>
+                      <motion.div
+                        key={project.title}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ 
+                          type: "spring" as const, 
+                          ...springConfig,
+                          delay: index * 0.1
+                        }}
+                      >
+                          <motion.a 
+                            href={project.link} 
+                            className={`group block h-full p-6 ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-purple-400/50' : 'bg-white/60 border-gray-200/50 hover:bg-white/80 hover:border-purple-400/80'} backdrop-blur-xl border rounded-2xl transition-all duration-300`}
+                            whileHover={{ y: -8, scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                          >
                               <h3 className={`text-xl font-bold ${isDarkMode ? 'text-white group-hover:text-purple-300' : 'text-gray-900 group-hover:text-purple-600'} mb-2 transition-colors`}>{project.title}</h3>
                               <p className={`text-sm font-semibold ${isDarkMode ? 'text-cyan-400' : 'text-cyan-600'} mb-3`}>{project.category}</p>
                               <p className={`${isDarkMode ? 'text-gray-200' : 'text-gray-800'} mb-4 text-sm`}>{project.description}</p>
@@ -222,8 +273,8 @@ export default function HomePage() {
                                   <span>View Details</span>
                                   <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform"/>
                               </span>
-                          </a>
-                      </AnimatedSection>
+                          </motion.a>
+                      </motion.div>
                   ))}
               </div>
           </div>
@@ -231,18 +282,28 @@ export default function HomePage() {
 
         {/* Final CTA */}
         <section className="py-20 px-6 text-center">
-          <AnimatedSection>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring" as const, ...springConfig }}
+          >
               <div className={`p-8 ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white/60 border-gray-200/50'} backdrop-blur-xl border rounded-3xl max-w-4xl mx-auto`}>
                   <Sparkles className={`mx-auto h-12 w-12 ${isDarkMode ? 'text-yellow-400' : 'text-yellow-600'} mb-6`}/>
                   <h2 className={`text-3xl md:text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-4`}>Have an Idea?</h2>
                   <p className={`text-lg ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} max-w-2xl mx-auto mb-8`}>
                       I'm always ready for the next challenge. Let's build something amazing together.
                   </p>
-                  <a href="/contact" className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-xl font-bold text-lg transition-all duration-300 hover:scale-105">
+                  <motion.a 
+                    href="/contact" 
+                    className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-xl font-bold text-lg transition-all duration-300"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                       <span>Let's Build Together</span>
-                  </a>
+                  </motion.a>
               </div>
-          </AnimatedSection>
+          </motion.div>
         </section>
       </div>
     </div>
