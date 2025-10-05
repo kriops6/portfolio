@@ -581,10 +581,10 @@ const PhysicsPage = () => {
   
   return (
     <>
-      <div className={`min-h-screen overflow-hidden transition-colors duration-500`}>
+      <div className={`overflow-hidden transition-colors duration-500`}>
         <QuantumPhysicsBackground />
         
-        <main className="relative z-10 container mx-auto px-6 py-24 sm:py-32">
+        <main className="relative z-10 container mx-auto px-6 py-12 sm:py-16">
         {/* Page Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
