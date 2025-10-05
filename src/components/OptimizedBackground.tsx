@@ -57,9 +57,9 @@ export default function OptimizedBackground({
         particlesRef.current.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-          size: Math.random() * 3 + 1.5, // Increased size
+          vx: (Math.random() - 0.5) * 0.2, // Reduced speed
+          vy: (Math.random() - 0.5) * 0.2, // Reduced speed
+          size: Math.random() * 3 + 1.5,
           hue: Math.random() * 180 + 180,
         });
       }
@@ -74,9 +74,9 @@ export default function OptimizedBackground({
         return;
       }
 
-      // Throttle to ~30 FPS instead of 60 FPS
+      // Throttle to ~20 FPS for better performance
       const deltaTime = currentTime - lastFrameTimeRef.current;
-      if (deltaTime < 33) { // ~30fps
+      if (deltaTime < 50) { // ~20fps
         animationFrameIdRef.current = requestAnimationFrame(animate);
         return;
       }

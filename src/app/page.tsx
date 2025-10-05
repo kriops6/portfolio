@@ -126,7 +126,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen w-full relative">
       {/* OptimizedBackground will handle the visual effects */}
-      <OptimizedBackground particleCount={60} connectionDistance={130} />
+      <OptimizedBackground particleCount={35} connectionDistance={100} />
       
       <div className="relative z-10 pt-20">
         {/* Hero Section */}
