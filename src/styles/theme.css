@@ -1,0 +1,53 @@
+/* Smooth animations for Observable Universe */
+@keyframes orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-planet {
+  from {
+    transform: rotate(var(--start-angle, 0deg)) translateX(var(--orbit-radius, 0px)) rotate(calc(-1 * var(--start-angle, 0deg)));
+  }
+  to {
+    transform: rotate(calc(360deg + var(--start-angle, 0deg))) translateX(var(--orbit-radius, 0px)) rotate(calc(-360deg - var(--start-angle, 0deg)));
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Hardware acceleration for smooth animations */
+* {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}

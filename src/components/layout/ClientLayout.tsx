@@ -1,18 +1,10 @@
-// Filename: src/app/layout.tsx
 "use client";
 
 import React from 'react';
-import './globals.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Code, Github, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ThemeProvider } from '../components/ThemeProvider';
-import { ThemeToggle } from '../components/ThemeToggle';
-import EasterEggs from '../components/EasterEggs';
-import KonamiCodeDetector from '../components/KonamiCodeDetector';
-import TypingTestGame from '../components/TypingTestGame';
-// Import will be handled by Next.js automatically
 
 // --- Page Transition Wrapper Component ---
 const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -31,7 +23,7 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
         initial="hidden"
         animate="enter"
         exit="exit"
-        transition={{ duration: 0.3 }}
+        transition={{ type: 'linear', duration: 0.3 }}
       >
         {children}
       </motion.div>
@@ -48,7 +40,6 @@ const Header = () => {
     { name: 'Experience', href: '/experience' },
     { name: 'Projects', href: '/projects' },
     { name: 'Skills', href: '/skills' },
-    { name: 'Beyond the Code', href: '/physics' },
     { name: 'Contact', href: '/contact' },
   ];
 
@@ -76,24 +67,10 @@ const Header = () => {
                 href={link.href}
                 className="relative px-6 py-2 rounded-full text-sm font-medium transition-colors duration-300 text-gray-300 hover:text-white"
               >
-                {/* LIQUID GLASS BUBBLE */}
                 {pathname === link.href && (
                   <motion.div
                     layoutId="active-pill"
-                    className="
-                      absolute inset-0
-                      bg-white/20
-                      backdrop-blur-xl
-                      backdrop-saturate-200
-                      rounded-full
-                      border border-white/30
-                      shadow-lg
-                      before:content-['']
-                      before:absolute before:inset-0
-                      before:rounded-full
-                      before:bg-gradient-to-br before:from-white/40 before:to-transparent
-                      before:opacity-30
-                    "
+                    className="absolute inset-0 bg-white/20 backdrop-blur-xl backdrop-saturate-200 rounded-full border border-white/30 shadow-lg"
                     style={{ borderRadius: 9999 }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />
@@ -104,20 +81,19 @@ const Header = () => {
           </div>
 
           <div className="flex items-center space-x-3">
-            <ThemeToggle />
             <a
               href="https://github.com/kriops6"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300 group border border-white/10"
             >
-              <Github size={20} />
+              <Github size={20} className="text-white" />
             </a>
             <a
               href="mailto:Krishnatmsv@gmail.com"
               className="p-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-all duration-300 group shadow-lg"
             >
-              <Mail size={20} />
+              <Mail size={20} className="text-white" />
             </a>
           </div>
         </div>
@@ -126,25 +102,16 @@ const Header = () => {
   );
 };
 
-// --- Root Layout Component ---
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+// Export the client layout component
+const ClientLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-gradient-to-br from-indigo-950 via-blue-900 to-violet-900 text-white">
-        <ThemeProvider>
-          <Header />
-          <PageTransitionWrapper>
-            {children}
-          </PageTransitionWrapper>
-          <EasterEggs />
-          <KonamiCodeDetector />
-          <TypingTestGame />
-        </ThemeProvider>
-      </body>
-    </html>
+    <>
+      <Header />
+      <main className="flex-grow pt-20">
+        <PageTransitionWrapper>{children}</PageTransitionWrapper>
+      </main>
+    </>
   );
-}
+};
+
+export default ClientLayout;

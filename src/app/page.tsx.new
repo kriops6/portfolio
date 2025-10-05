@@ -2,11 +2,114 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Sparkles, ArrowRight, Zap, ChevronDown, Brain } from 'lucide-react';
-import { useTheme } from '../components/ThemeProvider';
-import OptimizedBackground from '../components/OptimizedBackground';
+
+// --- Animated Background Component ---
+const AnimatedBackground = () => {
+  const canvasRef = useRef(null);
+  
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
+    let time = 0;
+    
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    const particles = [];
+    for (let i = 0; i < 80; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        size: Math.random() * 3 + 0.5,
+        hue: Math.random() * 300 + 180, // Wide range of colors
+      });
+    }
+    
+    const animate = () => {
+      time += 0.005;
+      
+      // Create complex gradient background
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      gradient.addColorStop(0, `hsl(${230 + Math.sin(time) * 30}, 60%, 20%)`);
+      gradient.addColorStop(0.2, `hsl(${260 + Math.cos(time * 1.3) * 25}, 65%, 15%)`);
+      gradient.addColorStop(0.4, `hsl(${290 + Math.sin(time * 0.7) * 35}, 70%, 22%)`);
+      gradient.addColorStop(0.6, `hsl(${220 + Math.cos(time * 1.1) * 20}, 55%, 18%)`);
+      gradient.addColorStop(0.8, `hsl(${270 + Math.sin(time * 1.5) * 30}, 60%, 25%)`);
+      gradient.addColorStop(1, `hsl(${240 + Math.cos(time * 0.8) * 25}, 58%, 20%)`);
+      
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Update and draw particles
+      particles.forEach((particle, i) => {
+        particle.x += particle.vx + Math.sin(time + i * 0.3) * 0.1;
+        particle.y += particle.vy + Math.cos(time + i * 0.5) * 0.1;
+        
+        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+        
+        particle.x = Math.max(0, Math.min(canvas.width, particle.x));
+        particle.y = Math.max(0, Math.min(canvas.height, particle.y));
+        
+        const alpha = 0.3 + Math.sin(time + i) * 0.4;
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${particle.hue + time * 50}, 80%, 70%, ${alpha})`;
+        ctx.fill();
+        
+        // Add glow effect
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${particle.hue + time * 50}, 90%, 80%, ${alpha * 0.2})`;
+        ctx.fill();
+        
+        // Connect nearby particles
+        particles.slice(i + 1).forEach(other => {
+          const dx = particle.x - other.x;
+          const dy = particle.y - other.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 150) {
+            ctx.beginPath();
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(other.x, other.y);
+            ctx.strokeStyle = `hsla(${particle.hue + time * 50}, 75%, 65%, ${0.15 * (1 - distance / 150)})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        });
+      });
+      
+      animationFrameId = requestAnimationFrame(animate);
+    };
+    
+    animate();
+    
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+  
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 w-full h-full z-0"
+      style={{ background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 20%, #6366f1 40%, #8b5cf6 60%, #a855f7 80%, #1e1b4b 100%)' }}
+    />
+  );
+};
 
 // --- Reusable Animated Component ---
-const AnimatedSection = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
+const AnimatedSection = ({ children, delay = 0 }) => {
     const [isVisible, setIsVisible] = useState(false);
     const ref = useRef(null);
 
@@ -44,7 +147,6 @@ const AnimatedSection = ({ children, delay = 0 }: { children: React.ReactNode; d
 
 // Custom typing animation component
 const TypeAnimation = () => {
-  const { isDarkMode } = useTheme();
   const [currentText, setCurrentText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -52,7 +154,6 @@ const TypeAnimation = () => {
   const texts = [
     'Software Engineering Student',
     'Full-Stack Developer',
-    'Context Engineer',
     'Robotics Engineer',
     'Innovator & Problem Solver'
   ];
@@ -81,9 +182,9 @@ const TypeAnimation = () => {
   }, [currentText, currentIndex, isDeleting, texts]);
   
   return (
-    <span className="inline-flex items-baseline">
+    <span>
       {currentText}
-      <span className={`inline-block w-0.5 h-[1em] ${isDarkMode ? 'bg-white' : 'bg-gray-800'} ml-1 animate-pulse`}>&nbsp;</span>
+      <span className="inline-block w-0.5 h-8 bg-white ml-1 animate-pulse">&nbsp;</span>
     </span>
   );
 };
@@ -107,15 +208,9 @@ const featuredProjects = [
 ];
 
 export default function HomePage() {
-  const { isDarkMode } = useTheme();
-  
   return (
-    <div className={`min-h-screen w-full relative transition-colors duration-500 ${
-      isDarkMode 
-        ? 'bg-gradient-to-br from-indigo-950 via-purple-900 to-blue-900' 
-        : 'bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50'
-    }`}>
-      <OptimizedBackground particleCount={25} connectionDistance={90} />
+    <div className="min-h-screen w-full relative bg-gradient-to-br from-indigo-950 via-purple-900 to-blue-900">
+      <AnimatedBackground />
       
       <div className="relative z-10 pt-20">
         {/* Hero Section */}
@@ -133,16 +228,16 @@ export default function HomePage() {
               </AnimatedSection>
               
               <AnimatedSection delay={2}>
-                  <div className={`text-2xl md:text-4xl lg:text-5xl font-light ${isDarkMode ? 'text-gray-200' : 'text-gray-700'} mb-8 h-16 md:h-20`}>
-                      <span className={`bg-gradient-to-r ${isDarkMode ? 'from-cyan-400 to-blue-400' : 'from-cyan-600 to-blue-600'} bg-clip-text text-transparent`}>
+                  <div className="text-2xl md:text-4xl lg:text-5xl font-light text-gray-200 mb-8 h-16 md:h-20">
+                      <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                         <TypeAnimation />
                       </span>
                   </div>
               </AnimatedSection>
               
               <AnimatedSection delay={4}>
-                  <p className={`text-lg md:text-xl lg:text-2xl ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} max-w-5xl mx-auto mb-12 leading-relaxed`}>
-                    From engineering <span className={`${isDarkMode ? 'text-purple-300' : 'text-purple-700'} font-semibold`}>autonomous swarm drone systems</span> with intelligent docking to developing <span className={`${isDarkMode ? 'text-cyan-300' : 'text-cyan-700'} font-semibold`}>AI-powered industrial inspection tools</span> and <span className={`${isDarkMode ? 'text-green-300' : 'text-green-700'} font-semibold`}>assistive wearables for the visually impaired</span>, I transform complex technical challenges into innovative, real-world solutions that push the boundaries of robotics, AI, and human-computer interaction.
+                  <p className="text-lg md:text-xl lg:text-2xl text-gray-200 max-w-5xl mx-auto mb-12 leading-relaxed">
+                    From architecting <span className="text-purple-300 font-semibold">full-stack collaborative platforms</span> with React and Node.js to engineering <span className="text-green-300 font-semibold">competition-winning automated robotics</span>, I thrive on transforming complex technical challenges into high-performance, scalable solutions.
                   </p>
               </AnimatedSection>
               
@@ -164,7 +259,7 @@ export default function HomePage() {
               </AnimatedSection>
               
               <div className="mt-20">
-                  <a href="#about-snippet" className={`flex flex-col items-center space-y-2 ${isDarkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} text-sm transition-colors duration-300`}>
+                  <a href="#about-snippet" className="flex flex-col items-center space-y-2 text-gray-400 text-sm hover:text-white transition-colors duration-300">
                       <span>Discover more</span>
                       <ChevronDown size={28} className="animate-bounce" />
                   </a>
@@ -175,11 +270,11 @@ export default function HomePage() {
         {/* About Me Snippet */}
         <section id="about-snippet" className="py-20 px-6">
           <AnimatedSection>
-              <div className={`max-w-4xl mx-auto text-center p-8 ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white/60 border-gray-200/50 hover:bg-white/80'} backdrop-blur-xl border rounded-3xl transition-all duration-300`}>
-                  <Brain className={`mx-auto h-12 w-12 ${isDarkMode ? 'text-cyan-400' : 'text-cyan-600'} mb-6`}/>
-                  <h2 className={`text-3xl md:text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-6`}>A Multi-Disciplinary Approach</h2>
-                  <p className={`text-lg ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} leading-relaxed`}>
-                      I am a software engineering student with a deep passion for building intelligent systems. My work spans the full stack of web development, from crafting responsive user interfaces with React to architecting robust back-end services, and extends into the physical world with robotics and mechatronics. Beyond code, I'm actively studying physics—from classical mechanics through quantum mechanics—with aspirations to achieve deep knowledge in particle physics, bringing a unique analytical lens to every challenge.
+              <div className="max-w-4xl mx-auto text-center p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl hover:bg-white/10 transition-all duration-300">
+                  <Brain className="mx-auto h-12 w-12 text-cyan-400 mb-6"/>
+                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">A Multi-Disciplinary Approach</h2>
+                  <p className="text-lg text-gray-200 leading-relaxed">
+                      I am a software engineering student with a deep passion for building intelligent systems. My work spans the full stack of web development, from crafting responsive user interfaces with React to architecting robust back-end services, and extends into the physical world with robotics and mechatronics.
                   </p>
               </div>
           </AnimatedSection>
@@ -190,24 +285,24 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto">
               <AnimatedSection>
                   <div className="text-center mb-16">
-                      <h2 className={`text-3xl md:text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-4`}>Featured Projects</h2>
-                      <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>A glimpse into my recent work.</p>
+                      <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Featured Projects</h2>
+                      <p className="text-lg text-gray-300">A glimpse into my recent work.</p>
                   </div>
               </AnimatedSection>
               
               <div className="grid md:grid-cols-2 gap-8">
                   {featuredProjects.map((project, index) => (
                       <AnimatedSection key={project.title} delay={index + 2}>
-                          <a href={project.link} className={`group block h-full p-6 ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-purple-400/50' : 'bg-white/60 border-gray-200/50 hover:bg-white/80 hover:border-purple-400/80'} backdrop-blur-xl border rounded-2xl transition-all duration-300 hover:-translate-y-2`}>
-                              <h3 className={`text-xl font-bold ${isDarkMode ? 'text-white group-hover:text-purple-300' : 'text-gray-900 group-hover:text-purple-600'} mb-2 transition-colors`}>{project.title}</h3>
-                              <p className={`text-sm font-semibold ${isDarkMode ? 'text-cyan-400' : 'text-cyan-600'} mb-3`}>{project.category}</p>
-                              <p className={`${isDarkMode ? 'text-gray-200' : 'text-gray-800'} mb-4 text-sm`}>{project.description}</p>
+                          <a href={project.link} className="group block h-full p-6 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl transition-all duration-300 hover:bg-white/10 hover:-translate-y-2 hover:border-purple-400/50">
+                              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">{project.title}</h3>
+                              <p className="text-sm font-semibold text-cyan-400 mb-3">{project.category}</p>
+                              <p className="text-gray-200 mb-4 text-sm">{project.description}</p>
                               <div className="flex flex-wrap gap-2 mb-4">
                                   {project.tech.map(tech => (
-                                      <span key={tech} className={`px-2 py-1 ${isDarkMode ? 'bg-blue-500/20 text-cyan-300 border-cyan-500/30' : 'bg-blue-100 text-cyan-700 border-cyan-400/50'} rounded text-xs border`}>{tech}</span>
+                                      <span key={tech} className="px-2 py-1 bg-blue-500/20 text-cyan-300 rounded text-xs border border-cyan-500/30">{tech}</span>
                                   ))}
                               </div>
-                              <span className={`font-semibold ${isDarkMode ? 'text-purple-300 group-hover:text-white' : 'text-purple-600 group-hover:text-purple-900'} flex items-center space-x-2 transition-colors text-sm`}>
+                              <span className="font-semibold text-purple-300 flex items-center space-x-2 group-hover:text-white transition-colors text-sm">
                                   <span>View Details</span>
                                   <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform"/>
                               </span>
@@ -221,10 +316,10 @@ export default function HomePage() {
         {/* Final CTA */}
         <section className="py-20 px-6 text-center">
           <AnimatedSection>
-              <div className={`p-8 ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white/60 border-gray-200/50'} backdrop-blur-xl border rounded-3xl max-w-4xl mx-auto`}>
-                  <Sparkles className={`mx-auto h-12 w-12 ${isDarkMode ? 'text-yellow-400' : 'text-yellow-600'} mb-6`}/>
-                  <h2 className={`text-3xl md:text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-4`}>Have an Idea?</h2>
-                  <p className={`text-lg ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} max-w-2xl mx-auto mb-8`}>
+              <div className="p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl max-w-4xl mx-auto">
+                  <Sparkles className="mx-auto h-12 w-12 text-yellow-400 mb-6"/>
+                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Have an Idea?</h2>
+                  <p className="text-lg text-gray-200 max-w-2xl mx-auto mb-8">
                       I'm always ready for the next challenge. Let's build something amazing together.
                   </p>
                   <a href="/contact" className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-xl font-bold text-lg transition-all duration-300 hover:scale-105">

@@ -1,25 +1,13 @@
-// Filename: src/app/about/page.tsx
-// This component creates the "About Me" page, detailing professional summary,
-// experience, education, and key achievements with an animated, interactive timeline.
-
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Briefcase, GraduationCap, Award, Sparkles, Brain, Target, Rocket, Users } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { useTheme } from '../../components/ThemeProvider';
 
 // --- Data specific to the About page ---
 const aboutData = {
-  summary: "Highly motivated and results-driven Software Engineering student at Queen’s University Belfast (a Russell Group university) with a robust foundation in full-stack development, robotics, and engineering. Proven ability to translate complex technical requirements into innovative, scalable solutions, as evidenced by the independent design, development, and deployment of \"Spin State (Project Pulsor)\"—a comprehensive collaborative platform. Demonstrated leadership, strategic problem-solving, and cross-cultural communication skills, cultivated through significant academic achievements, competitive successes, and impactful student representation roles. Eager to leverage cutting-edge technology and a proactive approach to drive innovation and foster collaborative success in dynamic software development environments.",
+  summary: "Highly motivated and results-driven Software Engineering student at Queen's University Belfast (a Russell Group university) with a robust foundation in full-stack development, robotics, and engineering. Proven ability to translate complex technical requirements into innovative, scalable solutions, as evidenced by the independent design, development, and deployment of 'Spin State (Project Pulsor)'—a comprehensive collaborative platform. Beyond software, I'm pursuing deep knowledge in physics—progressing from classical mechanics through quantum mechanics toward particle physics—bringing a unique analytical perspective to technical challenges. Demonstrated leadership, strategic problem-solving, and cross-cultural communication skills, cultivated through significant academic achievements, competitive successes, and impactful student representation roles. Eager to leverage cutting-edge technology and interdisciplinary knowledge to drive innovation and foster collaborative success in dynamic software development environments.",
   timeline: [
-    {
-      type: 'work',
-      icon: Briefcase,
-      date: '2017 – 2024',
-      title: 'Student Council Assistant',
-      subtitle: 'Al Khor International School (AKIS), Qatar',
-      description: 'Spearheaded the planning and execution of over 20 school events annually, including Olympiads and cultural programs, reaching more than 1,000 students.'
-    },
     {
       type: 'education',
       icon: GraduationCap,
@@ -41,7 +29,7 @@ const aboutData = {
       icon: Briefcase,
       date: '2024 – Present',
       title: 'Student Ambassador & International Student Representative',
-      subtitle: 'Queen’s University Belfast',
+      subtitle: "Queen's University Belfast",
       description: 'Advocated for the international student community, supported 15+ major university events, and mentored hundreds of new international students, easing their academic and cultural transition.'
     },
     {
@@ -49,7 +37,7 @@ const aboutData = {
       icon: GraduationCap,
       date: '2024 – Present',
       title: 'BEng (Hons) Software Engineering',
-      subtitle: 'Queen’s University Belfast, UK',
+      subtitle: "Queen's University Belfast, UK",
       description: 'Pursuing a rigorous curriculum at a prestigious Russell Group university, focusing on advanced software development principles and practices.'
     },
   ],
@@ -59,6 +47,103 @@ const aboutData = {
     { icon: Users, title: 'Diplomacy Expert', description: 'Awarded "Excellent Delegate" at Model United Nations (MUN) with a unanimously passed resolution.', color: 'text-green-400' },
     { icon: Brain, title: 'National Chess Finalist', description: 'Secured 3rd Place in the National Chess Competition, showcasing strategic thinking.', color: 'text-pink-400' },
   ]
+};
+
+// --- Animated Background Component ---
+const AnimatedBackground = () => {
+  const canvasRef = useRef(null);
+  
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
+    let time = 0;
+    
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    const particles = [];
+    for (let i = 0; i < 50; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        size: Math.random() * 2 + 1,
+        hue: Math.random() * 360,
+      });
+    }
+    
+    const animate = () => {
+      time += 0.01;
+      
+      // Create gradient background
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      gradient.addColorStop(0, `hsl(${220 + Math.sin(time) * 15}, 45%, 25%)`);
+      gradient.addColorStop(0.3, `hsl(${260 + Math.cos(time) * 10}, 50%, 30%)`);
+      gradient.addColorStop(0.7, `hsl(${300 + Math.sin(time * 0.8) * 20}, 55%, 28%)`);
+      gradient.addColorStop(1, `hsl(${270 + Math.cos(time * 0.6) * 15}, 60%, 32%)`);
+      
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Update and draw particles
+      particles.forEach((particle, i) => {
+        particle.x += particle.vx + Math.sin(time + i) * 0.1;
+        particle.y += particle.vy + Math.cos(time + i) * 0.1;
+        
+        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+        
+        particle.x = Math.max(0, Math.min(canvas.width, particle.x));
+        particle.y = Math.max(0, Math.min(canvas.height, particle.y));
+        
+        const alpha = 0.4 + Math.sin(time + i) * 0.3;
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${particle.hue + time * 30}, 80%, 75%, ${alpha})`;
+        ctx.fill();
+        
+        // Connect nearby particles
+        particles.slice(i + 1).forEach(other => {
+          const dx = particle.x - other.x;
+          const dy = particle.y - other.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 100) {
+            ctx.beginPath();
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(other.x, other.y);
+            ctx.strokeStyle = `hsla(${particle.hue + time * 30}, 80%, 70%, ${0.15 * (1 - distance / 100)})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        });
+      });
+      
+      animationFrameId = requestAnimationFrame(animate);
+    };
+    
+    animate();
+    
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+  
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 w-full h-full -z-10"
+      style={{ background: 'linear-gradient(135deg, #3b4371 0%, #6366f1 25%, #8b5cf6 50%, #d8b4fe 75%, #f3e8ff 100%)' }}
+    />
+  );
 };
 
 // --- Reusable Animated Components ---
@@ -88,112 +173,129 @@ const AnimatedCard = ({ children, delay = 0 }) => {
         };
     }, []);
 
+    const cardVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 }
+    };
+
     return (
-        <motion.div
+        <div
             ref={ref}
-            initial={{ opacity: 0, y: 20 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: delay * 0.1 }}
+            className={`transition-all duration-700 ease-out ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            }`}
+            style={{
+                transitionDelay: `${delay * 100}ms`
+            }}
         >
             {children}
-        </motion.div>
+        </div>
     );
 };
 
-
 const AboutPage = () => {
+  const { isDarkMode } = useTheme();
+  
   return (
-    <main className="relative z-10 container mx-auto px-6 py-24 sm:py-32">
-      {/* --- Page Header --- */}
-      <AnimatedCard>
-        <div className="text-center mb-20">
-          <h1 className="text-6xl md:text-8xl font-black mb-4">
-            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              My Journey
-            </span>
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
-            A timeline of my academic pursuits, professional growth, and personal passions.
-          </p>
-        </div>
-      </AnimatedCard>
-
-      {/* --- Professional Summary --- */}
-      <AnimatedCard delay={2}>
-        <section className="mb-24 max-w-4xl mx-auto">
-          <div className="relative p-8 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl">
-            <div className="absolute -top-5 -left-5 w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center transform -rotate-12">
-                <Brain size={32} className="text-white"/>
-            </div>
-            <h2 className="text-3xl font-bold mb-6 text-white">Who I Am</h2>
-            <p className="text-gray-300 leading-relaxed text-lg">
-              {aboutData.summary}
+    <div className={`min-h-screen overflow-hidden transition-colors duration-500 ${
+      isDarkMode 
+        ? 'bg-gradient-to-br from-slate-800 via-indigo-900 to-purple-900 text-white' 
+        : 'bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 text-gray-900'
+    }`}>
+      <AnimatedBackground />
+      
+      <main className="relative z-10 container mx-auto px-6 py-24 sm:py-32">
+        {/* --- Page Header --- */}
+        <AnimatedCard>
+          <div className="text-center mb-20">
+            <h1 className="text-6xl md:text-8xl font-black mb-4">
+              <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                My Journey
+              </span>
+            </h1>
+            <p className={`text-xl md:text-2xl ${isDarkMode ? 'text-gray-400' : 'text-gray-700'} max-w-3xl mx-auto`}>
+              A timeline of my academic pursuits, professional growth, and personal passions.
             </p>
           </div>
-        </section>
-      </AnimatedCard>
-
-      {/* --- Timeline Section --- */}
-      <section className="mb-24">
-        <AnimatedCard delay={3}>
-            <div className="text-center mb-16">
-                <h2 className="text-4xl font-bold text-white">Career & Education Timeline</h2>
-            </div>
         </AnimatedCard>
-        <div className="relative max-w-3xl mx-auto">
-          {/* The vertical line in the timeline */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-white/10"></div>
 
-          {aboutData.timeline.map((item, index) => (
-            <AnimatedCard key={index} delay={index * 1.5 + 4}>
-                <div className={`flex items-center w-full mb-8 ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}>
-                    {/* Content Card */}
-                    <div className="w-5/12">
-                        <div className={`p-6 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 text-right ${index % 2 !== 0 ? 'text-left' : ''}`}>
-                            <p className="text-sm font-semibold text-cyan-400 mb-1">{item.date}</p>
-                            <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
-                            <p className="text-sm text-gray-400 mb-3">{item.subtitle}</p>
-                            <p className="text-xs text-gray-300">{item.description}</p>
-                        </div>
-                    </div>
-
-                    {/* Center Icon */}
-                    <div className="relative z-10 flex items-center justify-center w-2/12">
-                        <div className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg ${item.type === 'work' ? 'bg-gradient-to-br from-blue-500 to-purple-600' : 'bg-gradient-to-br from-green-500 to-cyan-500'}`}>
-                            <item.icon size={24} className="text-white"/>
-                        </div>
-                    </div>
-
-                    {/* Spacer */}
-                    <div className="w-5/12"></div>
-                </div>
-            </AnimatedCard>
-          ))}
-        </div>
-      </section>
-
-      {/* --- Key Achievements Section --- */}
-      <section>
-        <AnimatedCard delay={10}>
-            <div className="text-center mb-16">
-                <h2 className="text-4xl font-bold text-white">Key Achievements</h2>
+        {/* --- Professional Summary --- */}
+        <AnimatedCard delay={2}>
+          <section className="mb-24 max-w-4xl mx-auto">
+            <div className={`relative p-8 ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white/60 border-gray-200/50'} backdrop-blur-xl rounded-3xl border shadow-2xl`}>
+              <div className="absolute -top-5 -left-5 w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center transform -rotate-12">
+                  <Brain size={32} className="text-white"/>
+              </div>
+              <h2 className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Who I Am</h2>
+              <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-800'} leading-relaxed text-lg`}>
+                {aboutData.summary}
+              </p>
             </div>
+          </section>
         </AnimatedCard>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {aboutData.achievements.map((ach, index) => (
-                <AnimatedCard key={index} delay={index * 1.5 + 11}>
-                    <div className="group h-full text-center p-8 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 transition-all duration-300 hover:bg-white/10 hover:border-white/20 hover:-translate-y-2">
-                        <div className={`inline-flex p-4 bg-white/10 rounded-xl mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                            <ach.icon size={32} className={ach.color}/>
-                        </div>
-                        <h3 className="text-xl font-bold text-white mb-2">{ach.title}</h3>
-                        <p className="text-gray-400 text-sm">{ach.description}</p>
-                    </div>
-                </AnimatedCard>
+
+        {/* --- Timeline Section --- */}
+        <section className="mb-24">
+          <AnimatedCard delay={3}>
+              <div className="text-center mb-16">
+                  <h2 className={`text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Career & Education Timeline</h2>
+              </div>
+          </AnimatedCard>
+          <div className="relative max-w-3xl mx-auto">
+            {/* The vertical line in the timeline */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-blue-400 via-purple-500 to-pink-500 opacity-50"></div>
+
+            {aboutData.timeline.map((item, index) => (
+              <AnimatedCard key={index} delay={index * 1.5 + 4}>
+                  <div className={`flex items-center w-full mb-8 ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}>
+                      {/* Content Card */}
+                      <div className="w-5/12">
+                          <div className={`p-6 ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20' : 'bg-white/60 border-gray-200/50 hover:bg-white/80 hover:border-gray-300/70'} backdrop-blur-xl rounded-2xl border transition-all duration-300 text-right ${index % 2 !== 0 ? 'text-left' : ''}`}>
+                              <p className={`text-sm font-semibold ${isDarkMode ? 'text-cyan-400' : 'text-cyan-600'} mb-1`}>{item.date}</p>
+                              <h3 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-2`}>{item.title}</h3>
+                              <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-700'} mb-3`}>{item.subtitle}</p>
+                              <p className={`text-xs ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>{item.description}</p>
+                          </div>
+                      </div>
+
+                      {/* Center Icon */}
+                      <div className="relative z-10 flex items-center justify-center w-2/12">
+                          <div className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg border-2 border-white/20 ${item.type === 'work' ? 'bg-gradient-to-br from-blue-500 to-purple-600' : 'bg-gradient-to-br from-green-500 to-cyan-500'}`}>
+                              <item.icon size={24} className="text-white"/>
+                          </div>
+                      </div>
+
+                      {/* Spacer */}
+                      <div className="w-5/12"></div>
+                  </div>
+              </AnimatedCard>
             ))}
-        </div>
-      </section>
-    </main>
+          </div>
+        </section>
+
+        {/* --- Key Achievements Section --- */}
+        <section>
+          <AnimatedCard delay={10}>
+              <div className="text-center mb-16">
+                  <h2 className={`text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Key Achievements</h2>
+              </div>
+          </AnimatedCard>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+              {aboutData.achievements.map((ach, index) => (
+                  <AnimatedCard key={index} delay={index * 1.5 + 11}>
+                      <div className={`group h-full text-center p-8 ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20' : 'bg-white/60 border-gray-200/50 hover:bg-white/80 hover:border-gray-300/70'} backdrop-blur-xl rounded-3xl border transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl`}>
+                          <div className={`inline-flex p-4 ${isDarkMode ? 'bg-white/10' : 'bg-white/40'} rounded-xl mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                              <ach.icon size={32} className={ach.color}/>
+                          </div>
+                          <h3 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-2`}>{ach.title}</h3>
+                          <p className={`${isDarkMode ? 'text-gray-400' : 'text-gray-700'} text-sm`}>{ach.description}</p>
+                      </div>
+                  </AnimatedCard>
+              ))}
+          </div>
+        </section>
+      </main>
+    </div>
   );
 };
 
