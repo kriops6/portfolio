@@ -19,7 +19,7 @@ interface OptimizedBackgroundProps {
 }
 
 export default function OptimizedBackground({ 
-  particleCount = 50, // Increased for better visibility
+  particleCount = 50,
   connectionDistance = 120, 
   gradientColors = ['#047857', '#1e40af', '#7c3aed', '#be185d']
 }: OptimizedBackgroundProps) {
@@ -59,8 +59,8 @@ export default function OptimizedBackground({
         particlesRef.current.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.2, // Reduced speed
-          vy: (Math.random() - 0.5) * 0.2, // Reduced speed
+          vx: (Math.random() - 0.5) * 0.2,
+          vy: (Math.random() - 0.5) * 0.2,
           size: Math.random() * 3 + 1.5,
           hue: Math.random() * 180 + 180,
         });
@@ -115,7 +115,7 @@ export default function OptimizedBackground({
         particle.x = Math.max(0, Math.min(canvas.width, particle.x));
         particle.y = Math.max(0, Math.min(canvas.height, particle.y));
 
-        const alpha = 0.6 + Math.sin(timeRef.current + i) * 0.3; // Increased opacity
+        const alpha = 0.6 + Math.sin(timeRef.current + i) * 0.3;
         
         // Draw particle
         ctx.beginPath();
@@ -128,16 +128,15 @@ export default function OptimizedBackground({
           const other = particles[j];
           const dx = particle.x - other.x;
           const dy = particle.y - other.y;
-          const distSq = dx * dx + dy * dy; // Use squared distance to avoid sqrt
+          const distSq = dx * dx + dy * dy;
           
           if (distSq < connectionDistance * connectionDistance) {
             const dist = Math.sqrt(distSq);
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(other.x, other.y);
-            ctx.strokeStyle = `hsla(${particle.hue}, 70%, 65%, ${0.3 * (1 - dist / connectionDistance)})`; // Increased line opacity
-            ctx.lineWidth = 1.5; // Thicker lines
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = `hsla(${particle.hue}, 70%, 65%, ${0.3 * (1 - dist / connectionDistance)})`;
+            ctx.lineWidth = 1.5;
             ctx.stroke();
           }
         }
