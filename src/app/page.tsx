@@ -124,12 +124,9 @@ export default function HomePage() {
   const { isDarkMode } = useTheme();
   
   return (
-    <div className={`min-h-screen w-full relative transition-colors duration-500 ${
-      isDarkMode 
-        ? 'bg-gradient-to-br from-indigo-950 via-purple-900 to-blue-900' 
-        : 'bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50'
-    }`}>
-      <OptimizedBackground particleCount={25} connectionDistance={90} />
+    <div className="min-h-screen w-full relative">
+      {/* OptimizedBackground will handle the visual effects */}
+      <OptimizedBackground particleCount={60} connectionDistance={130} />
       
       <div className="relative z-10 pt-20">
         {/* Hero Section */}

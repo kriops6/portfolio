@@ -84,8 +84,13 @@ export default function OptimizedBackground({
 
       timeRef.current += 0.005;
 
-      // Clear canvas with transparency
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Draw gradient background
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      gradient.addColorStop(0, '#1e1b4b'); // indigo-950
+      gradient.addColorStop(0.5, '#581c87'); // purple-900
+      gradient.addColorStop(1, '#1e3a8a'); // blue-900
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Update and draw particles
       for (let i = 0; i < particles.length; i++) {
