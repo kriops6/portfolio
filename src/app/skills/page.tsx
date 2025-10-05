@@ -367,12 +367,7 @@ export default function ArsenalPage() {
                         <div className="flex justify-between items-center mb-2">
                           <span className={`font-medium text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{skill.name}</span>
                           <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                            <AnimatedCounter 
-                              end={skill.level} 
-                              suffix="%" 
-                              duration={1000} 
-                              delay={(categoryIndex * 200) + (skillIndex * 100)}
-                            />
+                            {skill.level}%
                           </span>
                         </div>
                         <div className={`w-full rounded-full h-1.5 ${isDarkMode ? 'bg-gray-700' : 'bg-gray-300'}`}>

@@ -590,7 +590,7 @@ const PhysicsPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-10"
         >
           <h1 className="text-6xl md:text-8xl font-black mb-6">
             <span className="bg-gradient-to-r from-orange-400 via-yellow-300 to-white bg-clip-text text-transparent">
@@ -609,7 +609,7 @@ const PhysicsPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-4xl mx-auto mb-24 p-8 rounded-3xl bg-white/5 border-white/10 border backdrop-blur-xl"
+          className="max-w-4xl mx-auto mb-12 p-8 rounded-3xl bg-white/5 border-white/10 border backdrop-blur-xl"
         >
           <div className="flex items-center mb-6">
             <Brain className="w-12 h-12 mr-4 text-orange-400" />
@@ -632,7 +632,7 @@ const PhysicsPage = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center mb-24"
+          className="text-center mb-12"
         >
           <button
             onClick={() => setShowObservableUniverse(true)}
@@ -651,7 +651,7 @@ const PhysicsPage = () => {
         </motion.div>
 
         {/* Learning Path */}
-        <div className="mb-24">
+        <div className="mb-12">
           <motion.h2
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -692,7 +692,7 @@ const PhysicsPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mb-24"
+          className="text-center mb-12"
         >
           <div className="max-w-4xl mx-auto p-8 rounded-3xl bg-white/5 border-white/10 border backdrop-blur-xl">
             <Sparkles className="mx-auto h-12 w-12 mb-4 text-yellow-400" />
@@ -709,7 +709,7 @@ const PhysicsPage = () => {
         </motion.div>
 
         {/* Research Interests */}
-        <div className="mb-24">
+        <div className="mb-12">
           <motion.h2
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -795,7 +795,7 @@ const PhysicsPage = () => {
         </div>
 
         {/* The Great Questions */}
-        <div className="mb-24">
+        <div className="mb-12">
           <motion.h2
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -851,7 +851,7 @@ const PhysicsPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.9 }}
-          className="mb-24"
+          className="mb-8"
         >
           <h2 className="text-4xl font-bold text-center mb-12 text-white">
             Learning Resources
