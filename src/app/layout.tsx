@@ -10,6 +10,7 @@ import { usePathname } from 'next/navigation';
 import { SeasonalThemeProvider } from '../components/SeasonalThemeProvider';
 import { SeasonalThemeWheel } from '../components/SeasonalThemeWheel';
 import { SeasonalBackground } from '../components/SeasonalBackground';
+import { ThemeModeToggle } from '../components/ThemeModeToggle';
 import EasterEggs from '../components/EasterEggs';
 import KonamiCodeDetector from '../components/KonamiCodeDetector';
 import TypingTestGame from '../components/TypingTestGame';
@@ -142,6 +143,7 @@ export default function RootLayout({
             {children}
           </PageTransitionWrapper>
           <SeasonalThemeWheel />
+          <ThemeModeToggle />
           <EasterEggs />
           <KonamiCodeDetector />
           <TypingTestGame />
