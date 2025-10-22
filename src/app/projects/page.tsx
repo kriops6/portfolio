@@ -94,7 +94,7 @@ const projectsData = [
     title: "Spin State (Project Pulsor)",
     category: "Full-Stack",
     year: "2025",
-    description: "Designed, developed, and deployed a full-stack platform from the ground up to enable seamless collaboration among scientists and engineers.",
+    description: "A collaboration platform I built from scratch for scientists and engineers to work together. Full-stack, containerized, and ready to scale.",
     features: [
       "User Profiles & Secure Authentication",
       "Submission System & Q&A Forums",

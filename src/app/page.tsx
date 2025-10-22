@@ -81,28 +81,28 @@ const featuredProjects = [
   {
     title: "Spin State (Project Pulsor)",
     category: "Full-Stack",
-    description: "Designed and deployed a comprehensive full-stack platform enabling seamless collaboration among scientists and engineers.",
+    description: "A collaboration platform I built from scratch for scientists and engineers. Full-stack web app with real-time features and containerized deployment.",
     tech: ["React.js", "Node.js", "Docker", "MongoDB"],
     link: "/projects"
   },
   {
     title: "ORION-R: Autonomous Drone Swarm",
     category: "AI/ML & Robotics",
-    description: "Leading development of synchronized autonomous drones using computer vision and swarm intelligence for search & rescue operations.",
+    description: "Getting multiple drones to work together autonomously for search & rescue. They use computer vision and swarm intelligence to coordinate without human input.",
     tech: ["Computer Vision", "Swarm AI", "ROS", "Python"],
     link: "/projects"
   },
   {
     title: "Project Umbra: Haptic Headband",
     category: "Hardware & AI",
-    description: "Designed a smart haptic feedback headband for visually impaired navigation using depth sensors and spatial audio.",
+    description: "A wearable that helps visually impaired people navigate using vibration patterns. Depth sensors detect obstacles, spatial audio provides direction cues.",
     tech: ["Arduino", "Depth Sensing", "Haptics", "Spatial Audio"],
     link: "/projects"
   },
   {
     title: "IronEye: AI Manufacturing Inspector",
     category: "AI/ML",
-    description: "Built an AI-powered visual inspection system detecting manufacturing defects with 95% accuracy using deep learning.",
+    description: "AI that spots defects in manufacturing. Trained a deep learning model that catches issues with 95% accuracy—way better than manual inspection.",
     tech: ["TensorFlow", "Computer Vision", "Deep Learning", "Python"],
     link: "/projects"
   },
@@ -162,7 +162,7 @@ export default function HomePage() {
               
               <motion.div variants={itemVariants}>
                   <p className={`text-lg md:text-xl lg:text-2xl ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} max-w-5xl mx-auto mb-12 leading-relaxed`}>
-                    From engineering <span className={`${isDarkMode ? 'text-purple-300' : 'text-purple-700'} font-semibold`}>autonomous swarm drone systems</span> with intelligent docking to developing <span className={`${isDarkMode ? 'text-cyan-300' : 'text-cyan-700'} font-semibold`}>AI-powered industrial inspection tools</span> and <span className={`${isDarkMode ? 'text-green-300' : 'text-green-700'} font-semibold`}>assistive wearables for the visually impaired</span>, I transform complex technical challenges into innovative, real-world solutions that push the boundaries of robotics, AI, and human-computer interaction.
+                    I build things that matter. From <span className={`${isDarkMode ? 'text-purple-300' : 'text-purple-700'} font-semibold`}>drone swarms that talk to each other</span> to <span className={`${isDarkMode ? 'text-cyan-300' : 'text-cyan-700'} font-semibold`}>AI that spots manufacturing defects</span> and <span className={`${isDarkMode ? 'text-green-300' : 'text-green-700'} font-semibold`}>wearables that help people navigate</span>—I love turning wild ideas into working tech.
                   </p>
               </motion.div>
               
@@ -225,9 +225,9 @@ export default function HomePage() {
           >
               <div className={`max-w-4xl mx-auto text-center p-8 ${isDarkMode ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white/60 border-gray-200/50 hover:bg-white/80'} backdrop-blur-xl border rounded-3xl transition-all duration-300`}>
                   <Brain className={`mx-auto h-12 w-12 ${isDarkMode ? 'text-cyan-400' : 'text-cyan-600'} mb-6`}/>
-                  <h2 className={`text-3xl md:text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-6`}>A Multi-Disciplinary Approach</h2>
+                  <h2 className={`text-3xl md:text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-6`}>Code Meets Hardware</h2>
                   <p className={`text-lg ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} leading-relaxed`}>
-                      I am a software engineering student with a deep passion for building intelligent systems. My work spans the full stack of web development, from crafting responsive user interfaces with React to architecting robust back-end services, and extends into the physical world with robotics and mechatronics. Beyond code, I'm actively studying physics—from classical mechanics through quantum mechanics—with aspirations to achieve deep knowledge in particle physics, bringing a unique analytical lens to every challenge.
+                      I'm a software engineering student who can't stick to just one thing. I build full-stack web apps, mess around with robotics, and somehow ended up studying physics—from classical mechanics all the way to quantum. My goal? Understanding particle physics. Why? Because I'm curious about how everything works, from websites to the universe itself.
                   </p>
               </div>
           </motion.div>
@@ -296,9 +296,9 @@ export default function HomePage() {
           >
               <div className={`p-8 ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white/60 border-gray-200/50'} backdrop-blur-xl border rounded-3xl max-w-4xl mx-auto`}>
                   <Sparkles className={`mx-auto h-12 w-12 ${isDarkMode ? 'text-yellow-400' : 'text-yellow-600'} mb-6`}/>
-                  <h2 className={`text-3xl md:text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-4`}>Have an Idea?</h2>
+                  <h2 className={`text-3xl md:text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-4`}>Got Something Cool in Mind?</h2>
                   <p className={`text-lg ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} max-w-2xl mx-auto mb-8`}>
-                      I'm always ready for the next challenge. Let's build something amazing together.
+                      I'm always down for interesting projects. Let's talk.
                   </p>
                   <motion.a 
                     href="/contact" 
@@ -306,7 +306,7 @@ export default function HomePage() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                      <span>Let's Build Together</span>
+                      <span>Let's Talk</span>
                   </motion.a>
               </div>
           </motion.div>

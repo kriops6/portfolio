@@ -50,7 +50,7 @@ const skillCategories = [
     type: 'Backend Development',
     icon: <Server className="w-6 h-6" />,
     color: 'from-emerald-500 to-green-400',
-    description: 'Scalable server-side solutions and APIs',
+    description: 'Server-side logic, APIs, and data processing',
     skills: [
       { name: 'Node.js', level: 88 },
       { name: 'Python', level: 92 },
@@ -141,7 +141,7 @@ export default function ArsenalPage() {
           <p className={`text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed ${
             isDarkMode ? 'text-gray-300' : 'text-gray-700'
           }`}>
-            A comprehensive overview of my technical capabilities and expertise across multiple domains
+            What I know, what I use, and what I'm good at
           </p>
         </motion.div>
 
@@ -520,7 +520,7 @@ export default function ArsenalPage() {
           >
             <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Problem Solving & Critical Thinking</h3>
             <ul className={`space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              <li>� Developed innovative solutions for student integration challenges</li>
+              <li>� Found creative ways to help students integrate and feel welcome</li>
               <li>� Managed event logistics with tight deadlines and constraints</li>
               <li>� Adapted quickly to multicultural academic environments</li>
               <li>� Applied systematic thinking from physics to solve complex problems</li>

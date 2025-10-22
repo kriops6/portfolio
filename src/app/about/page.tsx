@@ -7,7 +7,7 @@ import OptimizedBackground from '../../components/OptimizedBackground';
 
 // --- Data specific to the About page ---
 const aboutData = {
-  summary: "Highly motivated and results-driven Software Engineering student at Queen's University Belfast (a Russell Group university) with a robust foundation in full-stack development, robotics, and engineering. Proven ability to translate complex technical requirements into innovative, scalable solutions, as evidenced by the independent design, development, and deployment of 'Spin State (Project Pulsor)'—a comprehensive collaborative platform. Beyond software, I'm pursuing deep knowledge in physics—progressing from classical mechanics through quantum mechanics toward particle physics—bringing a unique analytical perspective to technical challenges. Demonstrated leadership, strategic problem-solving, and cross-cultural communication skills, cultivated through significant academic achievements, competitive successes, and impactful student representation roles. Eager to leverage cutting-edge technology and interdisciplinary knowledge to drive innovation and foster collaborative success in dynamic software development environments.",
+  summary: "I'm a Software Engineering student at Queen's University Belfast who likes building stuff that actually works. Right now I'm juggling full-stack development, robotics projects, and a weird obsession with physics. I built 'Spin State'—a full collaboration platform for scientists—completely on my own, which taught me way more than any textbook could. Beyond the code, I'm working my way through physics from classical mechanics to quantum, with particle physics as the end goal. It gives me a different way of thinking about problems. I also represent international students at my university, help run major events, and mentor new students because I remember how overwhelming it was starting out. Basically, I like learning new things, building cool tech, and helping people along the way.",
   timeline: [
     {
       type: 'education',
@@ -15,7 +15,7 @@ const aboutData = {
       date: 'Graduated 2024',
       title: 'High School Diploma',
       subtitle: 'Al Khor International School (AKIS), Qatar',
-      description: 'Completed a comprehensive high school education, laying the groundwork for a future in engineering and technology.'
+      description: 'Where it all started—built my first programs and realized I wanted to make tech my career.'
     },
     {
       type: 'education',
@@ -23,7 +23,7 @@ const aboutData = {
       date: '2023 – 2024',
       title: 'Diploma in Engineering',
       subtitle: 'Specialized Technical Institute',
-      description: 'Completed an intensive diploma focusing on foundational engineering principles, applied mathematics, and hands-on workshop practices, providing a strong practical basis for advanced university studies.'
+      description: 'Hands-on engineering fundamentals and workshop experience. Got to actually build things instead of just reading about them.'
     },
     {
       type: 'work',
@@ -31,7 +31,7 @@ const aboutData = {
       date: '2024 – Present',
       title: 'Student Ambassador & International Student Representative',
       subtitle: "Queen's University Belfast",
-      description: 'Advocated for the international student community, supported 15+ major university events, and mentored hundreds of new international students, easing their academic and cultural transition.'
+      description: "Helping international students settle in, supporting university events, and making sure the student voice gets heard. It's rewarding work."
     },
     {
       type: 'education',
@@ -39,14 +39,14 @@ const aboutData = {
       date: '2024 – Present',
       title: 'BEng (Hons) Software Engineering',
       subtitle: "Queen's University Belfast, UK",
-      description: 'Pursuing a rigorous curriculum at a prestigious Russell Group university, focusing on advanced software development principles and practices.'
+      description: 'Learning software engineering at a Russell Group university. The curriculum is intense but exactly what I wanted.'
     },
   ],
   achievements: [
-    { icon: Award, title: 'Top Programmer', description: '3rd Place in the Alice Programming Competition at Carnegie Mellon University.', color: 'text-blue-400' },
-    { icon: Rocket, title: 'Robotics Innovator', description: '4th Place in the National Science Research Competition for an automated harbor prototype.', color: 'text-purple-400' },
-    { icon: Users, title: 'Diplomacy Expert', description: 'Awarded "Excellent Delegate" at Model United Nations (MUN) with a unanimously passed resolution.', color: 'text-green-400' },
-    { icon: Brain, title: 'National Chess Finalist', description: 'Secured 3rd Place in the National Chess Competition, showcasing strategic thinking.', color: 'text-pink-400' },
+    { icon: Award, title: 'Top Programmer', description: '3rd place in the Alice Programming Competition at Carnegie Mellon University.', color: 'text-blue-400' },
+    { icon: Rocket, title: 'Robotics Innovator', description: '4th place nationally for an automated harbor prototype. Robotics plus engineering was a fun combo.', color: 'text-purple-400' },
+    { icon: Users, title: 'Diplomacy Expert', description: 'Got "Excellent Delegate" at MUN with a resolution that actually passed unanimously. Turns out I can negotiate.', color: 'text-green-400' },
+    { icon: Brain, title: 'National Chess Finalist', description: "3rd place in the National Chess Competition. Strategy games and coding have more in common than you'd think.", color: 'text-pink-400' },
   ]
 };
 
@@ -117,7 +117,7 @@ const AboutPage = () => {
               </span>
             </h1>
             <p className={`text-xl md:text-2xl ${isDarkMode ? 'text-gray-400' : 'text-gray-700'} max-w-3xl mx-auto`}>
-              A timeline of my academic pursuits, professional growth, and personal passions.
+              From high school in Qatar to university in Belfast—here's how I got here.
             </p>
           </div>
         </AnimatedCard>
@@ -129,7 +129,7 @@ const AboutPage = () => {
               <div className="absolute -top-5 -left-5 w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center transform -rotate-12">
                   <Brain size={32} className="text-white"/>
               </div>
-              <h2 className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Who I Am</h2>
+              <h2 className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>What I'm About</h2>
               <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-800'} leading-relaxed text-lg`}>
                 {aboutData.summary}
               </p>
@@ -141,7 +141,7 @@ const AboutPage = () => {
         <section className="mb-12">
           <AnimatedCard delay={3}>
               <div className="text-center mb-16">
-                  <h2 className={`text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Career & Education Timeline</h2>
+                  <h2 className={`text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>How I Got Here</h2>
               </div>
           </AnimatedCard>
           <div className="relative max-w-3xl mx-auto">
@@ -180,7 +180,7 @@ const AboutPage = () => {
         <section>
           <AnimatedCard delay={10}>
               <div className="text-center mb-16">
-                  <h2 className={`text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Key Achievements</h2>
+                  <h2 className={`text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Things I'm Proud Of</h2>
               </div>
           </AnimatedCard>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">

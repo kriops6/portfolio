@@ -25,11 +25,11 @@ const experienceData = [
     company: "Queen's University Belfast",
     location: "Belfast, UK",
     years: "2024 – Present",
-    description: "Serving as a key liaison for the international student body, enhancing their university experience through proactive advocacy, event management, and mentorship.",
+    description: "Helping international students settle in and making their university experience better. I coordinate events, run mentorship programs, and make sure people feel welcome.",
     points: [
-      "Launched initiatives that significantly improved the integration and overall experience for international students.",
-      "Supported the logistics and execution of over 15 major university events, including open days and outreach programs.",
-      "Mentored hundreds of new international students, providing guidance to ease their academic and cultural transition.",
+      "Started programs that helped international students feel more at home and connected to campus life.",
+      "Helped organize and run 15+ major university events, from open days to outreach programs.",
+      "Mentored hundreds of new international students—helping them navigate both the academic stuff and adjusting to a new country.",
     ],
   },
 ];

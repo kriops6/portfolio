@@ -76,7 +76,7 @@ const ContactPage = () => {
             <p className={`text-xl md:text-2xl max-w-3xl mx-auto ${
               isDarkMode ? 'text-gray-200' : 'text-gray-800'
             }`}>
-                          I'm always searching for the next great challenge. If you have an innovative idea, a groundbreaking project, or an opportunity to push the boundaries of technology, I want to hear from it.
+              I'm always looking for interesting projects and opportunities. Got an idea you want to bring to life? Let's talk.
             </p>
           </div>
         </AnimatedCard>
