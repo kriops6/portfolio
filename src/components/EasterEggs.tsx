@@ -152,15 +152,15 @@ export default function EasterEggs() {
             transition={{ type: "spring", damping: 20, stiffness: 300 }}
             className="fixed bottom-8 left-8 z-[9999] max-w-sm"
           >
-            <div className="bg-gradient-to-r from-pink-500 to-purple-500 rounded-2xl shadow-2xl border-2 border-white/30 p-6 backdrop-blur-xl">
+            <div className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl shadow-2xl border-2 border-white/30 p-6 backdrop-blur-xl">
               <div className="flex items-start space-x-4">
-                <span className="text-4xl">🎵</span>
+                <span className="text-4xl">⚡</span>
                 <div>
                   <p className="text-white font-bold text-lg mb-1">
                     Caught you clicking!
                   </p>
                   <p className="text-white/90 text-sm font-medium">
-                    I actually like Sabrina Carpenter 💖
+                    Someone&apos;s got energy today! �
                   </p>
                 </div>
               </div>

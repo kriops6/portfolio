@@ -23,7 +23,7 @@ export function SeasonalBackground() {
           style={{
             background: isDarkMode 
               ? 'radial-gradient(ellipse 1000px 800px at 70% 10%, rgba(220, 240, 255, 0.4), rgba(190, 225, 255, 0.25) 40%, transparent 70%)'
-              : 'radial-gradient(ellipse 1000px 800px at 70% 10%, rgba(6, 182, 212, 0.15), rgba(14, 165, 233, 0.08) 40%, transparent 70%)',
+              : 'radial-gradient(ellipse 1000px 800px at 70% 10%, rgba(148, 226, 255, 0.2), rgba(191, 219, 254, 0.12) 42%, transparent 72%)',
             zIndex: 0,
           }}
         />
@@ -34,7 +34,7 @@ export function SeasonalBackground() {
           style={{
             background: isDarkMode
               ? 'linear-gradient(to bottom, rgba(210, 235, 255, 0.2), transparent 50%)'
-              : 'linear-gradient(to bottom, rgba(224, 242, 254, 0.3), transparent 50%)',
+              : 'linear-gradient(to bottom, rgba(241, 245, 249, 0.32), rgba(190, 230, 255, 0.18) 55%, transparent 88%)',
             zIndex: 0,
           }}
         />
@@ -65,7 +65,7 @@ export function SeasonalBackground() {
                 },
               },
               color: {
-                value: isDarkMode ? '#ffffff' : '#06b6d4',
+                value: isDarkMode ? '#ffffff' : '#38bdf8',
               },
               shape: {
                 type: 'circle',
@@ -226,7 +226,7 @@ export function SeasonalBackground() {
           style={{
             background: isDarkMode
               ? 'radial-gradient(ellipse 1000px 1000px at 50% -20%, rgba(255, 245, 200, 0.4), rgba(255, 220, 150, 0.2) 30%, transparent 60%)'
-              : 'radial-gradient(ellipse 1000px 1000px at 50% -20%, rgba(245, 158, 11, 0.15), rgba(251, 191, 36, 0.1) 30%, transparent 60%)',
+              : 'radial-gradient(ellipse 1000px 1000px at 50% -20%, rgba(252, 211, 77, 0.14), rgba(125, 211, 252, 0.12) 32%, transparent 62%)',
             zIndex: 0,
           }}
         />
@@ -237,7 +237,7 @@ export function SeasonalBackground() {
           style={{
             background: isDarkMode
               ? 'linear-gradient(to bottom, rgba(255, 240, 200, 0.15), transparent 40%)'
-              : 'linear-gradient(to bottom, rgba(254, 243, 199, 0.3), transparent 40%)',
+              : 'linear-gradient(to bottom, rgba(255, 251, 235, 0.28), rgba(224, 242, 254, 0.16) 55%, transparent 85%)',
             zIndex: 0,
           }}
         />
@@ -270,7 +270,7 @@ export function SeasonalBackground() {
               color: {
                 value: isDarkMode
                   ? ['#ffd700', '#ffed4e', '#fff9c4', '#ffe57f']
-                  : ['#fbbf24', '#f59e0b', '#eab308', '#facc15'],
+                  : ['#fbbf24', '#f6ad55', '#fbd38d', '#38bdf8', '#7dd3fc'],
               },
               shape: {
                 type: 'triangle',
